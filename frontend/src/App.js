@@ -12,7 +12,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // import { useLogout } from './Hooks/useLogout';
 import UploadArtWork from './Pages/UploadForm/uploadArtWork';
 //import ShopPage from './Pages/ShowArt';
-import NewItem from "./Components/showArtcomponent/newItem"
+import NewItem from "./Components/showArtcomponent/showArt"
 import useAuthenticationContextHook from './Hooks/useAuthenticationContextHook';
 import ForgetPage from './Pages/ForgetPage';
 

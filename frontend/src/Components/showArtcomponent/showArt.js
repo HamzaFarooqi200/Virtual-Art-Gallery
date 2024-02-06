@@ -1,19 +1,19 @@
 import styled from "styled-components";
-import { Button } from "./newItemComponents/button";
+import { Button } from "./ShowArt/button";
 import {
   DropdownMenuTrigger,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuContent,
   DropdownMenu,
-} from "./newItemComponents/dropdown-menu";
+} from "./ShowArt/dropdown-menu";
 import {
   CardHeader,
   CardContent,
   Card,
   CardFooter,
-} from "./newItemComponents/card";
-import { ScrollArea } from "./newItemComponents/scroll-area";
+} from "./ShowArt/card";
+import { ScrollArea } from "./ShowArt/scroll-area";
 import {React,  useState } from "react";
 import dp from "../showArtcomponent/placeholder.jpg";
 import reel from "../../images/hamzaPic.jpg";
