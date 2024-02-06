@@ -15,9 +15,11 @@ export const useSignUp = () => {
     const { dispatch } = useContext(AuthenticationContext);
 
 
-    const signUp = async (email, password) => {
+    const signUp = async (formData) => {
         // console.log(email)
         // console.log(password)
+        const email = formData.get("email")
+        const password = formData.get("password")
         
         if (email && password) {
             setIsLoading(true)
@@ -25,13 +27,8 @@ export const useSignUp = () => {
                 const response = await fetch("/api/users/signup",
                     {
                         method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            email,
-                            password
-                        })
+                        body:formData
+                        
                     })
                     // console.log(response)
                     // console.log("........")

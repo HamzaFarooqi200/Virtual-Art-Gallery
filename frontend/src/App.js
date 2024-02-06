@@ -11,7 +11,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 //import Navbar from './Components/Navbar';
 // import { useLogout } from './Hooks/useLogout';
 import UploadArtWork from './Pages/UploadForm/uploadArtWork';
-import ShopPage from './Pages/ShowArt';
+//import ShopPage from './Pages/ShowArt';
+import NewItem from "./Components/showArtcomponent/newItem"
 import useAuthenticationContextHook from './Hooks/useAuthenticationContextHook';
 import ForgetPage from './Pages/ForgetPage';
 
@@ -41,7 +42,7 @@ const App = () => {
 
         <Route
             path="/discoverArt"
-            element={user ? <ShopPage/>: <Navigate to="/login" />}
+            element={user ? <NewItem/>: <Navigate to="/login" />}
           />
 
           <Route

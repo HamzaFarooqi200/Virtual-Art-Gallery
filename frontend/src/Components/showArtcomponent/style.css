@@ -1,0 +1,123 @@
+.page-container {
+  display: flex; /* Create the overall three-column layout */
+  width: 100%;
+}
+
+.left-div {
+  flex-basis: 30%; /* Adjust width as needed */
+  /* Add content for the left div */
+}
+
+.center-content {
+  flex-basis: 50%; /* Adjust width as needed */
+  display: flex; /* Center the content horizontally */
+  justify-content: center;
+}
+
+.right-div {
+  flex-basis: 20%; /* Adjust width as needed */
+  /* Leave empty or add content as needed */
+}
+
+/* Styles for the item component within the center div */
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem; /* Adjust as needed */
+}
+
+.image-container img {
+  max-width: 80%; /* Adjust max-width as needed */
+}
+
+.image-caption {
+  font-size: 1rem; /* Adjust font size as needed */
+  margin-top: 0.5rem; /* Adjust margin as needed */
+  text-align: left; /* For centered captions */
+}
+
+.item-details {
+  display: flex; /* Ensure horizontal layout */
+  flex-direction: row; /* Arrange items in a row */
+  align-items: center; /* Vertically center items */
+  justify-content: space-between; /* Distribute items evenly */
+  margin-top: 10px; /* Adjust as needed */
+}
+
+.price {
+  font-weight: bold;
+  font-size: 3rem; /* Adjust as needed */
+  text-align: left; /* Left-align the price text */
+  margin-right: 10px; /* Add optional margin to separate from rating */
+  color: red; /* Adjust color as needed */
+}
+
+/* Existing styles */
+
+.rating-container {
+  display: flex;
+  align-items: center;
+}
+
+.rating-stars {
+  display: flex;
+  margin-top: 10px; /* Adjust as needed */
+  align-items: left; /* Align stars to the left */
+}
+
+.rating-score {
+  margin-top: 10px;
+  margin-left: 5px;
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+/* Additional styles */
+.rating-stars img {
+  max-width: 25px; /* Adjust star size */
+  margin-right: 5px; /* Adjust spacing between stars */
+  align-items: self-start;
+}
+
+.side-by-side-buttons {
+  display: flex;
+  justify-content: space-between; /* Distribute buttons evenly */
+  margin-top: 10px; /* Adjust as needed */
+}
+
+.side-by-side-buttons button {
+  margin: 0 5px; /* Add spacing between buttons */
+}
+
+/* Existing styles */
+
+/* Additional styles */
+.action-buttons {
+  display: flex; /* Arrange buttons horizontally */
+  margin-top: 5px; /* Adjust spacing as needed */
+  justify-content: space-between; /* Distribute buttons evenly */
+  width: 100%;
+}
+.col {
+  display: flex; /* Enable horizontal layout */
+  flex-direction: row; /* Arrange items in a column */
+  margin-left: 0px;
+  margin-top: 10px;
+  width: 80%;
+}
+.col button {
+  margin-right: 20px; /* Add spacing to the right of each button */
+}
+
+.col button:last-child {
+  margin-right: 0; /* Remove spacing from the last button */
+}
+
+.title {
+  font-size: 60px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+}

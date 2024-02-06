@@ -30,20 +30,21 @@ const logInUser = async (req, res) => {
 }
 
 const signUpUser = async (req, res) => {
-    const { email, password } = req.body;
-  
+
+    const {firstName,lastName,email, password , dateOfBirth,gender,image} = req.body;
+    console.log(req.body)
+    console.log("HERE at the moment in signup")
     try {
-        console.log("HERE at the moment")
-        const existingUser = await User.findOne({ email});
-        console.log("HERE at the moment 2")
-        
+          const existingUser = await User.findOne({ email});
+
         if (existingUser) {
             // User already exists, return an error response
             return res.status(400).json({ error: "User already exists" });
         }
+        console.log("HERE at the moment1")
 
         // User does not exist, proceed with creating a new user
-        const user = await User.signUp(email, password);
+        const user = await User.signUp(firstName,lastName,email, password , dateOfBirth,gender,image);
         const token = createToken(user._id);
 
         res.status(200).json({ email, token });

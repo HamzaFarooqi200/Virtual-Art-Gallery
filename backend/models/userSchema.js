@@ -5,23 +5,44 @@ const validator=require("validator")
 
 
 const userSchema=new Schema({
-    email:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    password:{
-        type:String,
-        required:true
-    }
+    firstName: {
+        type: String,
+        required: true,
+      },
+      lastName: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+        unique: true,
+      },
+      password: {
+        type: String,
+        required: true,
+      },
+      dateOfBirth: {
+        type: Date,
+      },
+      gender: {
+        type: String,
+        enum: ['Male', 'Female', 'Others'],
+      },
+      image: {
+        type: String,
+      },
+      createdAt: {
+        type: Date,
+        default: new Date().getDate(),
+      },
 })
 
 // for static sign up method in order for the security reason to encrypt the password
 
-userSchema.statics.signUp= async (email , password) => {
+userSchema.statics.signUp= async (firstName,lastName,email , password,dateOfBirth,gender,image) => {
 
     // validating the email and password using validator module 
-    
     if(! email || ! password){
         throw Error("Email and password must not be empty")
     }
@@ -49,7 +70,7 @@ userSchema.statics.signUp= async (email , password) => {
     const hash= await bcrypt.hash(password , saltValue)
 
     // now creating the user 
-    const user= await UserModel.create({email , password:hash})
+    const user= await UserModel.create({firstName,lastName,email , password:hash,dateOfBirth,gender,image})
 
     return user
 
@@ -78,7 +99,7 @@ userSchema.statics.logIn= async (email , password) => {
     {
         throw Error("Incorrect Password")
     }
-
+    console.log("here ")
     return user
 }
 
