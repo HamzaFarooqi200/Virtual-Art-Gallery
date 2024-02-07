@@ -7,14 +7,9 @@ import {
   DropdownMenuContent,
   DropdownMenu,
 } from "./ShowArt/dropdown-menu";
-import {
-  CardHeader,
-  CardContent,
-  Card,
-  CardFooter,
-} from "./ShowArt/card";
+import { CardHeader, CardContent, Card, CardFooter } from "./ShowArt/card";
 import { ScrollArea } from "./ShowArt/scroll-area";
-import {React,  useState } from "react";
+import { React, useState } from "react";
 import dp from "../showArtcomponent/placeholder.jpg";
 import reel from "../../images/hamzaPic.jpg";
 
@@ -29,6 +24,26 @@ export default function NewItem() {
   const closeDropdown = () => {
     setIsDropdownVisible(false);
   };
+  //add to art dunction
+  async function addToCart(id, quantity) {
+    try {
+      const response = await fetch("http://localhost:4000/artwork", {
+        method: "POST",
+        body: JSON.stringify({
+          artId: id,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      let data = await response.json();
+      alert("Item Added To Cart");
+      console.log(data);
+    } catch (err) {
+      alert("Something Went Wrong");
+      console.log(err);
+    }
+  }
   const ProfileImage = styled.img`
     max-width: 130px;
     border: 1px solid #919191;
@@ -158,7 +173,13 @@ export default function NewItem() {
                     </div>
                   </Button>
 
-                  <Button className="btn btn-success mr-2" variant="ghost">
+                  {/* new changes */}
+
+                  <Button
+                    className="btn btn-success mr-2"
+                    variant="ghost"
+                    onClick={(e) => addToCart(1)}
+                  >
                     <div
                       style={{
                         display: "flex",
