@@ -15,6 +15,7 @@ import UploadArtWork from './Pages/UploadForm/uploadArtWork';
 import NewItem from "./Components/showArtcomponent/showArt"
 import useAuthenticationContextHook from './Hooks/useAuthenticationContextHook';
 import ForgetPage from './Pages/ForgetPage';
+import { AddCart } from './Components/showArtcomponent/AddCart';
 
 import './App.css';
 
@@ -35,6 +36,11 @@ const App = () => {
             path="/"
             element={<Design/>}
           />
+          <Route
+            path="/addToCart"
+            element={<AddCart/>}
+          />
+
         <Route
             path="/uploadArt"
             element={user ?  <UploadArtWork/> : <Navigate to="/login" />}

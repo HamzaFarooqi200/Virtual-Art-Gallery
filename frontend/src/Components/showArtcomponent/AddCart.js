@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
+
 export const AddCart = (props) => {
   const [carts, setCarts] = useState([]);
   const [payload, setPayloader] = useState({});

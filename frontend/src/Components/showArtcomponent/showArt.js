@@ -12,8 +12,10 @@ import { ScrollArea } from "./ShowArt/scroll-area";
 import { React, useState } from "react";
 import dp from "../showArtcomponent/placeholder.jpg";
 import reel from "../../images/hamzaPic.jpg";
+import { useNavigate } from 'react-router-dom';
 
 export default function NewItem() {
+  const navigate = useNavigate();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const handleButtonClick = () => {
@@ -25,24 +27,27 @@ export default function NewItem() {
     setIsDropdownVisible(false);
   };
   //add to art dunction
-  async function addToCart(id, quantity) {
-    try {
-      const response = await fetch("http://localhost:4000/artwork", {
-        method: "POST",
-        body: JSON.stringify({
-          artId: id,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
-      let data = await response.json();
-      alert("Item Added To Cart");
-      console.log(data);
-    } catch (err) {
-      alert("Something Went Wrong");
-      console.log(err);
-    }
+  async function addToCart(id) {
+ 
+    console.log("Add to cart Button has been clicked");
+    navigate('/addToCart');
+    // try {
+    //   const response = await fetch("http://localhost:4000/artwork", {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //       artId: id,
+    //     }),
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8",
+    //     },
+    //   });
+    //   let data = await response.json();
+    //   alert("Item Added To Cart");
+    //   console.log(data);
+    // } catch (err) {
+    //   alert("Something Went Wrong");
+    //   console.log(err);
+    // }
   }
   const ProfileImage = styled.img`
     max-width: 130px;
@@ -178,7 +183,7 @@ export default function NewItem() {
                   <Button
                     className="btn btn-success mr-2"
                     variant="ghost"
-                    onClick={(e) => addToCart(1)}
+          
                   >
                     <div
                       style={{
@@ -187,7 +192,7 @@ export default function NewItem() {
                         alignItems: "center",
                       }}
                     >
-                      <BookmarkIcon className="w-4 h-4" />
+                      <BookmarkIcon className="w-4 h-4"  onClick={(e) => addToCart()}/>
                     </div>
                   </Button>
                   <Button className="btn btn-success" variant="ghost">
