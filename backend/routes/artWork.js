@@ -3,11 +3,13 @@ const express = require('express');
 const router = express.Router();
 const multer  = require('multer')
 
-const { saveArtwork } = require('../controller/artController');
+const { saveArtwork, getAllArtworks } = require('../controller/artController');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/")
+   // cb(null, "C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/")
+   //Kabeers Path
+    cb(null, "C:/Users/Lenovo/OneDrive/Desktop/Final/FYP/frontend/src/uploads/")
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now();
@@ -19,5 +21,8 @@ const upload = multer({ storage: storage })
 
 // Route for saving artwork with file upload
 router.post('/upload', upload.single('image'),  saveArtwork);
+
+//Route for getting all the artworks
+router.get('/allArtworks', getAllArtworks);
 
 module.exports = router;

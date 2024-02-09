@@ -13,11 +13,14 @@ import { React, useState } from "react";
 import dp from "../showArtcomponent/placeholder.jpg";
 import reel from "../../images/hamzaPic.jpg";
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+
+
 
 export default function NewItem() {
   const navigate = useNavigate();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
+  const [artworks, setArtworks] = useState([]);const [hasError, setError] = useState(false);
   const handleButtonClick = () => {
     console.log("Button clicked");
     setIsDropdownVisible((prevState) => !prevState);
@@ -26,6 +29,22 @@ export default function NewItem() {
   const closeDropdown = () => {
     setIsDropdownVisible(false);
   };
+
+  async function fetchArtworks() {
+    try {
+      const response = await fetch(
+        "http://localhost:4000/api/artworks/allArtworks"
+      );
+      const data = await response.json();
+      console.log(data);
+      setArtworks(data);
+    } catch (error) {
+      setError(error);
+    }
+  }
+ useEffect(() => {
+   fetchArtworks();
+ }, []);
   //add to art dunction
   async function addToCart(id) {
  
@@ -144,74 +163,80 @@ export default function NewItem() {
           </div>
         </ScrollArea>
       </div>
-      <div className="flex-grow lg:w-1/3">
+      <>
         <ScrollArea className="h-[650px]">
           <div className="grid gap-4">
-            <Card className="rounded-none shadow-none border-0">
-              <CardContent className="p-0">
-                <img
-                  alt="Reel"
-                  className="aspect-square object-cover"
-                  height={600}
-                  src={reel}
-                  width={500}
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    marginTop: "15px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    position: "center",
-                  }}
-                >
-                  <Button className="btn btn-success mr-2" variant="ghost">
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <HeartIcon className="w-4 h-4" />
-                    </div>
-                  </Button>
+            {artworks.map((artwork) => (
+              <Card
+                key={artwork._id}
+                className="rounded-none shadow-none border-0"
+              >
+                <CardContent className="p-0">
+                  <img
+                    alt="Artwork Here"
+                    className="aspect-square object-cover"
+                    height={600}
+                    //Dynamic Image SRC
+                    src={reel}
+                    width={500}
+                  />
 
-                  {/* new changes */}
-
-                  <Button
-                    className="btn btn-success mr-2"
-                    variant="ghost"
-          
+                  <div
+                    style={{
+                      display: "flex",
+                      marginTop: "15px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                      position: "center",
+                    }}
                   >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <BookmarkIcon className="w-4 h-4"  onClick={(e) => addToCart()}/>
-                    </div>
-                  </Button>
-                  <Button className="btn btn-success" variant="ghost">
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <ShoppingBagIcon className="w-4 h-4" />
-                    </div>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                    <Button className="btn btn-success mr-2" variant="ghost">
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <HeartIcon className="w-4 h-4" />
+                      </div>
+                    </Button>
+
+                    {/* new changes */}
+
+                    <Button className="btn btn-success mr-2" variant="ghost">
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <BookmarkIcon
+                          className="w-4 h-4"
+                          onClick={(e) => addToCart(artwork._id)}
+                        />
+                      </div>
+                    </Button>
+                    <Button className="btn btn-success" variant="ghost">
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <ShoppingBagIcon className="w-4 h-4" />
+                      </div>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </ScrollArea>
-      </div>
+      </>
       <div className="flex-grow lg:w-1/3">
         <ScrollArea className="h-[650px]">
           <div className="grid gap-4">
@@ -263,9 +288,16 @@ export default function NewItem() {
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="p-4 flex flex-row items-center justify-between">
-                <h2 className="text-lg font-semibold">Price: $9999</h2>
-              </CardFooter>
+              <>
+                <CardFooter className="p-4 flex flex-row items-center justify-between">
+                  {" "}
+                  {artworks.map((artwork) => (
+                    <h2 className="text-lg font-semibold">
+                      Price: ${artwork.price}
+                    </h2>
+                  ))}
+                </CardFooter>
+              </>
             </Card>
           </div>
         </ScrollArea>
