@@ -20,7 +20,9 @@ import { useEffect } from "react";
 export default function NewItem() {
   const navigate = useNavigate();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [artworks, setArtworks] = useState([]);const [hasError, setError] = useState(false);
+  const [artworks, setArtworks] = useState([]);
+  const [hasError, setError] = useState(false);
+
   const handleButtonClick = () => {
     console.log("Button clicked");
     setIsDropdownVisible((prevState) => !prevState);
@@ -33,7 +35,7 @@ export default function NewItem() {
   async function fetchArtworks() {
     try {
       const response = await fetch(
-        "http://localhost:4000/api/artworks/allArtworks"
+        "api/artworks/allArtworks"
       );
       const data = await response.json();
       console.log(data);
@@ -42,32 +44,18 @@ export default function NewItem() {
       setError(error);
     }
   }
+
  useEffect(() => {
    fetchArtworks();
  }, []);
+
   //add to art dunction
   async function addToCart(id) {
  
     console.log("Add to cart Button has been clicked");
     navigate('/addToCart');
-    // try {
-    //   const response = await fetch("http://localhost:4000/artwork", {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       artId: id,
-    //     }),
-    //     headers: {
-    //       "Content-type": "application/json; charset=UTF-8",
-    //     },
-    //   });
-    //   let data = await response.json();
-    //   alert("Item Added To Cart");
-    //   console.log(data);
-    // } catch (err) {
-    //   alert("Something Went Wrong");
-    //   console.log(err);
-    // }
   }
+
   const ProfileImage = styled.img`
     max-width: 130px;
     border: 1px solid #919191;
@@ -91,6 +79,7 @@ export default function NewItem() {
                     <AvatarFallback>AC</AvatarFallback>
                   </Avatar> */}
                   {/* <div className="flex"> */}
+
                   <ProfileImage src={dp} />
                   Acme Inc
                   <DropdownMenu>
@@ -177,8 +166,8 @@ export default function NewItem() {
                     className="aspect-square object-cover"
                     height={600}
                     //Dynamic Image SRC
-                   // src={require(`../../uploads/${artwork.image}`)}
-                    src={reel}
+                    src={require(`../../uploads/${artwork.image}`)}
+                    //src={reel}
                     width={500}
                   />
 
