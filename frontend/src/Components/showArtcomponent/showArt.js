@@ -177,6 +177,7 @@ export default function NewItem() {
                     className="aspect-square object-cover"
                     height={600}
                     //Dynamic Image SRC
+                   // src={require(`../../uploads/${artwork.image}`)}
                     src={reel}
                     width={500}
                   />

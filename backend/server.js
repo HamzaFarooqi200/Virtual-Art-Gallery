@@ -22,7 +22,13 @@ const app = express();
 // middleware
 app.use(express.json()); // This middleware parses JSON in the request body
 app.use((req, res, next) => {
-  console.log(req.body);
+  console.log(req.body);res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   next();
 });
 
