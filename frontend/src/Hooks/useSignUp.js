@@ -44,8 +44,8 @@ export const useSignUp = () => {
                 if (response.ok) {
                     setIsLoading(false)
                     dispatch({ type: "SIGNUP", payload: data })
-                    // console.log(JSON.stringify(data))
-                    //localStorage.setItem("user", JSON.stringify(data))
+                    console.log(data.email)
+                    localStorage.setItem("email" , data.email)
                     setError(null)
                 }
             }

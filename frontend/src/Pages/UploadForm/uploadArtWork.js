@@ -27,6 +27,10 @@ const UploadArtWork = () => {
 
     // console.log('Image:', file);
     // Create a FormData object to send the form data including the image file
+    const uploadedBy = localStorage.getItem('email');
+    console.log("----------------------------------- 1");
+    console.log(uploadedBy)
+    console.log("----------------------------------- 2");
     const formData = new FormData();
     formData.append('title', e.currentTarget.elements.title.value);
     formData.append('artistType', e.currentTarget.elements.artistType.value);
@@ -37,6 +41,7 @@ const UploadArtWork = () => {
     formData.append('ownership', e.currentTarget.elements.ownership.value);
     formData.append('description', e.currentTarget.elements.description.value);
     formData.append('image', file);
+    formData.append('uploadedBy', uploadedBy); 
   
     try {
       // Make a POST request to your API endpoint

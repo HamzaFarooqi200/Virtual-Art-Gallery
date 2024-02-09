@@ -2,7 +2,8 @@ const User = require("../models/userSchema")
 // json web token
 const jwt=require("jsonwebtoken")
 const bcrypt=require("bcrypt")
-
+// for cookies of user to maintain session
+const Cookies = require('js-cookie');
 // creating own function in context of Json web token
 
 const createToken=(_id)=>{
@@ -18,7 +19,9 @@ const logInUser = async (req, res) => {
     try{
         const user=await User.logIn(email,password)
 
-        // creating a token
+        // const expirationTime = newDate(newDate().getTime() + 60000);
+        // Cookies.set('email', JSON.stringify(userData), { expires: expirationTime });
+
         const token=createToken(user._id)
 
         res.status(200).json({email,token})
@@ -45,6 +48,11 @@ const signUpUser = async (req, res) => {
 
         // User does not exist, proceed with creating a new user
         const user = await User.signUp(firstName,lastName,email, password , dateOfBirth,gender,image);
+        
+        // const expirationTime = newDate(newDate().getTime() + 60000);
+        // Cookies.set('email', JSON.stringify(userData), { expires: expirationTime });
+
+        console.log("HERE at the moment2")  
         const token = createToken(user._id);
 
         res.status(200).json({ email, token });
@@ -63,10 +71,8 @@ const forgetPassword = async (req, res) => {
       console.log("HERE at the moment")
       // Hash the new password
       const saltValue = await bcrypt.genSalt(10);
-//      console.log(saltValue)
+
       const hash = await bcrypt.hash(newPassword, saltValue);
-    //   console.log(hash)
-    //   console.log("HERE at the moment1")
       // Update the user's password with the hashed version
       user.password = hash;
       await user.save();

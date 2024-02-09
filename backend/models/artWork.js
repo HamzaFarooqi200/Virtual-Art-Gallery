@@ -37,7 +37,11 @@ const artworkSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true
-  }
+  },
+  uploadedBy: {
+    type: String,
+    required: true
+  },
 });
 
 // Create the Artwork model

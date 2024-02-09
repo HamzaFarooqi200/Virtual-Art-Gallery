@@ -12,7 +12,7 @@ const express = require("express");
 require("../backend/models/userSchema");
 require("../backend/models/artWork");
 
-const workoutRoutes = require("./routes/workouts");
+//const workoutRoutes = require("./routes/workouts");
 const userRoutes = require("./routes/users");
 const artworkRoutes = require("./routes/artWork");
 
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/workouts/", workoutRoutes);
+//app.use("/api/workouts/", workoutRoutes);
 
 // using  users routes
 app.use("/api/users/", userRoutes);

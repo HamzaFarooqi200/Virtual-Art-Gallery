@@ -13,11 +13,9 @@ export const useLogout = () => {
 
     const logOut = () => {
         // removing item from local storage
-        localStorage.removeItem('user');
-        
+        localStorage.clear();
         //dispatching logout action
         dispatch({ type: "LOGOUT" });
-        //workoutDispatch({type: "SET_WORKOUT" , payload:null})
 
     }
     return {logOut}

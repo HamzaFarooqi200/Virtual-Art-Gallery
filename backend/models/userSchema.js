@@ -72,6 +72,10 @@ userSchema.statics.signUp= async (firstName,lastName,email , password,dateOfBirt
     // now creating the user 
     const user= await UserModel.create({firstName,lastName,email , password:hash,dateOfBirth,gender,image})
 
+    // creating a user session 
+    req.session.user = {
+      email: user.email
+    };
     return user
 
 }

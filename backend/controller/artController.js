@@ -1,13 +1,13 @@
 const Artwork = require('../models/artWork');  
+const Cookies = require('js-cookie');
 
 const saveArtwork = async (req, res) => {
   try {
     // Extract data from the request
     console.log(req.body);
-    const { title, price, medium, style, category, ownership, description } = req.body;
+    const { title, price, medium, style, category, ownership, description, uploadedBy } = req.body;
     const image = req.file.filename;
     console.log(image);
-
     // Create an instance of Artwork model
     const newArtwork = new Artwork({
       title,
@@ -17,7 +17,8 @@ const saveArtwork = async (req, res) => {
       category,
       ownership,
       description,
-      image: image
+      image: image,
+      uploadedBy: uploadedBy
     });
 
     // Save the artwork to the database

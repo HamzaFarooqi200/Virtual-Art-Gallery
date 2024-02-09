@@ -11,9 +11,10 @@ import { CardHeader, CardContent, Card, CardFooter } from "./ShowArt/card";
 import { ScrollArea } from "./ShowArt/scroll-area";
 import { React, useState } from "react";
 import dp from "../showArtcomponent/placeholder.jpg";
-import reel from "../../images/hamzaPic.jpg";
+//import reel from "../../images/hamzaPic.jpg";
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from "react";
+import Navbar from "../Navbar";
 
 
 
@@ -64,6 +65,8 @@ export default function NewItem() {
     flex-basis: 40%;
   `;
   return (
+    <div>
+    <Navbar/>
     <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 p-4 md:p-6">
       <div className="flex-grow lg:w-1/3">
         <ScrollArea className="h-[650px]">
@@ -292,6 +295,7 @@ export default function NewItem() {
           </div>
         </ScrollArea>
       </div>
+    </div>
     </div>
   );
 }

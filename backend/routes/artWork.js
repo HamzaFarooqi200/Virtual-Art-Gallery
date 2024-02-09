@@ -9,7 +9,9 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
    // cb(null, "C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/")
    //Kabeers Path
-    cb(null, "C:/Users/Lenovo/OneDrive/Desktop/Final/FYP/frontend/src/uploads/")
+    //cb(null, "C:/Users/Lenovo/OneDrive/Desktop/Final/FYP/frontend/src/uploads/")
+    //jamshaid path
+    cb(null, "C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/")
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now();

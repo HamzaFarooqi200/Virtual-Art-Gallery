@@ -44,7 +44,8 @@ export const useLogin = () => {
                 if (response.ok) {
                     setIsLoading(false)
                     dispatch({ type: "LOGIN", payload: data })
-                    localStorage.setItem("user", JSON.stringify(data))
+                    console.log(data.email)
+                    localStorage.setItem("email", data.email)
                 }
             }
             catch (er) {
