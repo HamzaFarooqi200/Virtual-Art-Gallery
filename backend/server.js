@@ -11,10 +11,12 @@ const express = require("express");
 
 require("../backend/models/userSchema");
 require("../backend/models/artWork");
+require("../backend/models/cart");
 
 //const workoutRoutes = require("./routes/workouts");
 const userRoutes = require("./routes/users");
 const artworkRoutes = require("./routes/artWork");
+const cartRoutes = require("./routes/cartRoute");
 
 //making an instance of express
 const app = express();
@@ -22,7 +24,8 @@ const app = express();
 // middleware
 app.use(express.json()); // This middleware parses JSON in the request body
 app.use((req, res, next) => {
-  console.log(req.body);res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  console.log(req.body);
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -38,6 +41,7 @@ app.use((req, res, next) => {
 app.use("/api/users/", userRoutes);
 
 app.use("/api/artworks/", artworkRoutes);
+app.use("/api/carts/", cartRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)

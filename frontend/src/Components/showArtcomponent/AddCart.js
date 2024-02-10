@@ -1,38 +1,27 @@
 import React, { useState, useEffect } from "react";
-//import { Link } from "react-router-dom";
 
 export const AddCart = (props) => {
   const [carts, setCarts] = useState([]);
   const [payload, setPayloader] = useState({});
   const [hasError, setError] = useState(false);
+
   async function fetchCart() {
-    const res = await fetch("http://localhost:4000/cart");
-    res
-      .json()
-      .then((res) => {
-        console.log(res.data.items);
-        setCarts(res.data.items);
-        setPayloader(res.data);
-      })
-      .catch((error) => {
-        setError(error);
-      });
-  }
-  async function emptyCart() {
     try {
-      const res = await fetch("http://localhost:4000/cart/empty-cart", {
-        method: "DELETE",
-      });
-      await res.json();
-      fetchCart();
-      props.history.push("/");
-    } catch (err) {
-      console.log(err);
+      const res = await fetch("api/carts/allCarts");
+      const data = await res.json();
+
+      console.log(data.cartItems);
+      setCarts(data.cartItems);
+      setPayloader(data);
+    } catch (error) {
+      setError(error);
     }
   }
+
   useEffect(() => {
     fetchCart();
   }, []);
+
   return (
     <main>
       <section>
@@ -56,33 +45,44 @@ export const AddCart = (props) => {
               <div className="col-lg-9">
                 <div className="row shop-listing">
                   <table className="table shop-table">
-                    <tr>
-                      <th className="b-0">Name</th>
-                      <th className="b-0">Price</th>
-                      <th className="b-0 text-right">Total Price</th>
-                    </tr>
-                    {carts.map((item, i) => (
+                    <thead>
                       <tr>
-                        <td>{item.productId.name}</td>
-                        <td>{item.productId.price}</td>
-                        <td className="text-right">
-                          <h5 className="font-medium m-b-30">{item.total}</h5>
+                        <th className="b-0">Name</th>
+                        <th className="b-0">Price</th>
+                        <th className="b-0 text-right">Total Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {carts && carts.length > 0 ? (
+                        carts.map((item, i) => (
+                          <tr key={item._id}>
+                            <td>{item.artid}</td>
+                            <td>{item.price}</td>
+                            <td className="text-right">
+                              <h5 className="font-medium m-b-30">
+                                {item.price}
+                              </h5>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="3" align="center">
+                            No items in the cart
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colSpan="3" align="right">
+                          Subtotal: {payload.subTotal}
+                        </td>
+                        <td colSpan="4" align="right">
+                          <button className="btn btn-danger">Empty cart</button>
                         </td>
                       </tr>
-                    ))}
-                    <tr>
-                      <td colspan="3" align="right">
-                        Subtotal :{payload.subTotal}
-                      </td>
-                      <td colspan="4" align="right">
-                        <button
-                          className="btn btn-danger"
-                          onClick={(e) => emptyCart()}
-                        >
-                          Empty cart
-                        </button>
-                      </td>
-                    </tr>
+                    </tfoot>
                   </table>
                 </div>
               </div>
