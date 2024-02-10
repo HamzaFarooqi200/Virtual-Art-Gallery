@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 export const AddCart = (props) => {
   const [carts, setCarts] = useState([]);
-  const [payload, setPayloader] = useState({});
+  const [payload, setPayload] = useState({ subTotal: 0 });
   const [hasError, setError] = useState(false);
 
   async function fetchCart() {
@@ -10,13 +10,22 @@ export const AddCart = (props) => {
       const res = await fetch("api/carts/allCarts");
       const data = await res.json();
 
-      console.log(data.cartItems);
-      setCarts(data.cartItems);
-      setPayloader(data);
+      console.log("the response of cart data ", data);
+      setCarts(data); 
+      calculateSubtotal(data);
     } catch (error) {
       setError(error);
     }
   }
+
+  // Calculate subtotal based on cart items
+  const calculateSubtotal = (cartItems) => {
+    let subTotal = 0;
+    cartItems.forEach((item) => {
+      subTotal += item.price;
+    });
+    setPayload({ subTotal });
+  };
 
   useEffect(() => {
     fetchCart();
@@ -30,9 +39,6 @@ export const AddCart = (props) => {
             <div className="row justify-content-center">
               <div className="col-md-6 align-self-center text-center">
                 <h1 className="title">Cart Listing</h1>
-                <h6 className="subtitle op-8">
-                  We are small team of creative people working together
-                </h6>
               </div>
             </div>
           </div>
@@ -56,7 +62,7 @@ export const AddCart = (props) => {
                       {carts && carts.length > 0 ? (
                         carts.map((item, i) => (
                           <tr key={item._id}>
-                            <td>{item.artid}</td>
+                            <td><img  height="300px" width ="300px" src={require(`../../uploads/${item.image}`)}></img></td>
                             <td>{item.price}</td>
                             <td className="text-right">
                               <h5 className="font-medium m-b-30">

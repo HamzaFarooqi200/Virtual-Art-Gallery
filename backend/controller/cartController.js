@@ -1,23 +1,30 @@
 const Cart = require("../models/cart");
-const Cookies = require("js-cookie");
+
 
 const saveCart = async (req, res) => {
   try {
     // Extract data from the request
     console.log(req.body);
     const { currentUser, artid, price, description, image } = req.body;
-    //const image = req.file.filename;
-    console.log(req.body);
-    // Create an instance of Artwork model
+
+    // Check if the image already exists in the database
+    const existingCart = await Cart.findOne({ image });
+
+    if (existingCart) {
+      // If the image already exists, return an error response
+      return res.status(400).json({ error: "Image already exists in the cart" });
+    }
+
+    // Create an instance of Cart model
     const newCart = new Cart({
       currentUser,
       artid,
       price,
       description,
-      image: image,
+      image,
     });
 
-    // Save the artwork to the database
+    // Save the cart entry to the database
     await newCart.save();
 
     res.status(201).json({ message: "Cart uploaded successfully!" });
@@ -31,8 +38,7 @@ const getAllCartItems = async (req, res) => {
   try {
     // Fetch all the artworks from the database
     const cartItems = await Cart.find({});
-    console.log("my arts : ", { cartItems });
-
+    //console.log("my arts : ", { cartItems });
     res.status(200).json(cartItems);
   } catch (error) {
     console.error(error);

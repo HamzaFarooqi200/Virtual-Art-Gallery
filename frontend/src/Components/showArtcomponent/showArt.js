@@ -68,8 +68,9 @@ export default function NewItem() {
       });
       let data = await response.json();
       alert("Item Added To Cart");
+      console.log("Cart item data here ");
       console.log(data);
-      // navigate("/AddCart");
+      navigate("/AddCart");
     } catch (err) {
       alert("Something Went Wrong");
       console.log(err);
