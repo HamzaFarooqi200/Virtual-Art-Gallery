@@ -38,7 +38,7 @@ function Login() {
     <div>
       <Navbar />
     <MDBContainer fluid>
-      <MDBRow>
+      <MDBRow className="justify-content-center">
         <MDBCol sm='6'>
 
           <div className='d-flex flex-row ps-5 pt-5 mt-10'>

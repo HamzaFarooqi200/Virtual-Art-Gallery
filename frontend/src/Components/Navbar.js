@@ -53,14 +53,14 @@ const Navbar = () => {
                   >
                     Discover Art
                   </Link>
-                  <Link
-                  to="/team"
+                <Link
+                  to="/VirtualGallery"
                   className={classNames(
                     "text-white ",
                     "px-5 py-3 rounded-md text-sm font-medium"
                   )}
                 >
-                  Team
+                  Virtual Exhibition 
                 </Link>
                 <Link
                   to="/uploadArt"
@@ -71,6 +71,25 @@ const Navbar = () => {
                 >
                   Upload Art
                 </Link>
+                <Link
+                  to="/AddCart"
+                  className={classNames(
+                    "text-white ",
+                    "px-5 py-3 rounded-md text-sm font-medium"
+                  )}
+                >
+                  Your Cart 
+                </Link>
+                <Link
+                  to="/team"
+                  className={classNames(
+                    "text-white ",
+                    "px-5 py-3 rounded-md text-sm font-medium"
+                  )}
+                >
+                  Team
+                </Link>
+
                 </div>
 
                 ) : (

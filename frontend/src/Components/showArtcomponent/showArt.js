@@ -86,7 +86,13 @@ export default function NewItem() {
   `;
   return (
     <div>
+      <div>
       <Navbar />
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      </div>
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 p-4 md:p-6">
         <div className="flex-grow lg:w-1/3">
           <ScrollArea className="h-[650px]">

@@ -45,7 +45,38 @@ const getAllCartItems = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+const deleteAllCartItems = async (req, res) => {
+  try {
+    // Delete all items from the cart
+    await Cart.deleteMany({});
+
+    res.status(200).json({ message: 'All cart items deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+// const deleteCartItem = async (req, res) => {
+//   try {
+//     const { cartItemId } = req.params;
+
+//     // Find and delete the cart item by ID
+//     const deletedCartItem = await Cart.findByIdAndDelete(cartItemId);
+
+//     if (!deletedCartItem) {
+//       return res.status(404).json({ message: 'Cart item not found' });
+//     }
+
+//     res.status(200).json({ message: 'Cart item deleted successfully' });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// };
+
 module.exports = {
   saveCart,
-  getAllCartItems,
+  getAllCartItems,deleteAllCartItems
 };
