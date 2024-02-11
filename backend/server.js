@@ -17,6 +17,7 @@ require("../backend/models/cart");
 const userRoutes = require("./routes/users");
 const artworkRoutes = require("./routes/artWork");
 const cartRoutes = require("./routes/cartRoute");
+const userProfileRoutes = require("./routes/userProfile")
 
 //making an instance of express
 const app = express();
@@ -42,6 +43,8 @@ app.use("/api/users/", userRoutes);
 
 app.use("/api/artworks/", artworkRoutes);
 app.use("/api/carts/", cartRoutes);
+app.use("/api/userProfile", userProfileRoutes)
+
 
 mongoose
   .connect(process.env.MONGO_URI)

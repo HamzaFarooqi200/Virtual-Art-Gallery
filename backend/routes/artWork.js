@@ -7,7 +7,6 @@ const { saveArtwork, getAllArtworks } = require('../controller/artController');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-   // cb(null, "C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/")
    //Kabeers Path
     //cb(null, "C:/Users/Lenovo/OneDrive/Desktop/Final/FYP/frontend/src/uploads/")
     //jamshaid path

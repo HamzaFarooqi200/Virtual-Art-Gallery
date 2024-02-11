@@ -6,7 +6,7 @@ const AboutWrapper = styled.div`
 `;
 
 const ProfileName = styled.h2`
- color:#000000;
+  color: #000000;
   margin: 0;
   font-weight: 500;
   font-size: 18px;
@@ -18,8 +18,8 @@ const ProfileCategory = styled.span`
 `;
 
 const BioText = styled.span`
-color:#000000;  
-display: block;
+  color: #000000;
+  display: block;
   margin-top: 3px;
 `;
 
@@ -31,13 +31,21 @@ const BioLink = styled.a`
   margin-top: 3px;
 `;
 
-function About() {
+function About({ userProfile }) {
+  // Check if userProfile is defined and not an empty array
+  if (!userProfile || userProfile.length === 0) {
+    return null; // or display a loading message
+  }
+
+  const user = userProfile[0];
+
   return (
     <AboutWrapper>
-      <ProfileName>Muhammad Waqas</ProfileName>
-      <ProfileCategory>Pakistan</ProfileCategory>
-      <BioText>📒Member Since 2024</BioText>
+      <ProfileName><b>{`${user.firstName} ${user.lastName}`}</b></ProfileName>
+      <ProfileCategory>{user.country}</ProfileCategory>
+      <BioText>📒Member Since {new Date(user.createdAt).getFullYear()}</BioText>
     </AboutWrapper>
   );
 }
+
 export default About;

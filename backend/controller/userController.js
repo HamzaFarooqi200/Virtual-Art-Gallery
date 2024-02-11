@@ -34,8 +34,10 @@ const logInUser = async (req, res) => {
 
 const signUpUser = async (req, res) => {
 
-    const {firstName,lastName,email, password , dateOfBirth,gender,image} = req.body;
+    const {firstName,lastName,email, password , dateOfBirth,gender} = req.body;
+    const image = req.file.filename;
     console.log(req.body)
+    console.log(image)
     console.log("HERE at the moment in signup")
     try {
           const existingUser = await User.findOne({ email});

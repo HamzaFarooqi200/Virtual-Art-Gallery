@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import scLogo from "../../images/jamshaidPic.jpg";
+//import scLogo from "../../images/jamshaidPic.jpg";
 
 const ProfileDetailsWrapper = styled.div`
   display: flex;
@@ -43,23 +43,27 @@ const StatsLabel = styled.span`
   font-size: 14px;
 `;
 
-function ProfileDetails() {
+function ProfileDetails({userProfile ,userArts }) {
+  const user = userProfile[0];
+  const profilePic = user.image;
+  const posts = userArts.length
+
   return (
     <ProfileDetailsWrapper>
-      <ProfileImage src={scLogo} />
+      <ProfileImage src={require(`../../uploads/ProfileImage/${profilePic}`)} />
       <ProfileStats>
         <StatsBlock>
-          <StatsNumber>9</StatsNumber>
+          <StatsNumber>{posts}</StatsNumber>
           <StatsLabel>posts</StatsLabel>
         </StatsBlock>
-        <StatsBlock>
+        {/* <StatsBlock>
           <StatsNumber>55.3K</StatsNumber>
           <StatsLabel>followers</StatsLabel>
         </StatsBlock>
         <StatsBlock>
           <StatsNumber>332</StatsNumber>
           <StatsLabel>following</StatsLabel>
-        </StatsBlock>
+        </StatsBlock> */}
       </ProfileStats>
     </ProfileDetailsWrapper>
   );
