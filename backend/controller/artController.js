@@ -35,7 +35,7 @@ const getAllArtworks = async (req, res) => {
   try {
     // Fetch all the artworks from the database
     const artworks = await Artwork.find({});
-    console.log("my arts : ",{artworks});
+    //console.log("my arts : ",{artworks});
 
     res.status(200).json(artworks);
   } catch (error) {

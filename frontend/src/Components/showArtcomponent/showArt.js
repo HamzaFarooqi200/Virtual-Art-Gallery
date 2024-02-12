@@ -10,7 +10,7 @@ import {
 import { CardHeader, CardContent, Card, CardFooter } from "./ShowArt/card";
 import { ScrollArea } from "./ShowArt/scroll-area";
 import { React, useState } from "react";
-import dp from "../showArtcomponent/placeholder.jpg";
+//import dp from "../showArtcomponent/placeholder.jpg";
 //import reel from "../../images/hamzaPic.jpg";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -21,6 +21,10 @@ export default function NewItem() {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [artworks, setArtworks] = useState([]);
   const [hasError, setError] = useState(false);
+
+  // const [userDetails, setUserDetails] = useState({});
+  // const [userDetailsError, setUserDetailsError] = useState(false);
+
 
   const handleButtonClick = () => {
     console.log("Button clicked");
@@ -35,8 +39,21 @@ export default function NewItem() {
     try {
       const response = await fetch("api/artworks/allArtworks");
       const data = await response.json();
-      console.log(data);
-      setArtworks(data);
+  
+      // Fetch user details for each artwork
+      const artworksWithUserDetails = await Promise.all(
+        data.map(async (artwork) => {
+          const userResponse = await fetch(`/api/userProfile/getUserProfileData?email=${artwork.uploadedBy}`);
+          const userData = await userResponse.json();
+          return {
+            ...artwork,
+            userDetails: userData,
+          };
+        })
+      );
+      setArtworks(artworksWithUserDetails);
+      //console.log("These are the Artworks with user details: ", artworksWithUserDetails);
+   
     } catch (error) {
       setError(error);
     }
@@ -44,7 +61,7 @@ export default function NewItem() {
 
   useEffect(() => {
     fetchArtworks();
-  }, []);
+    });
 
   //add to art dunction
   async function addToCart(id, description, price, image) {
@@ -78,12 +95,13 @@ export default function NewItem() {
   }
 
   const ProfileImage = styled.img`
-    max-width: 130px;
+    max-width: 80px;
     border: 1px solid #919191;
     border-radius: 50%;
     padding: 4px;
     flex-basis: 40%;
   `;
+  console.log("artworks are as" ,artworks)
   return (
     <div>
       <div>
@@ -93,7 +111,9 @@ export default function NewItem() {
       <br/>
       <br/>
       </div>
+      {artworks.map((artwork) => (
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 p-4 md:p-6">
+      
         <div className="flex-grow lg:w-1/3">
           <ScrollArea className="h-[650px]">
             <div className="grid gap-4">
@@ -103,8 +123,16 @@ export default function NewItem() {
                     className="flex items-center gap-5 text-sm font-semibold"
                     href="#"
                   >
-                    <ProfileImage src={dp} />
-                    Acme Inc
+        
+              {artwork.userDetails.map((userDetail) => ( 
+                <div>
+                  <ProfileImage src={require(`../../uploads/ProfileImage/${userDetail.image}`)} />
+                  {userDetail.firstName}
+                </div>
+              ))}
+
+
+
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
@@ -157,19 +185,11 @@ export default function NewItem() {
                 </CardHeader>
                 <CardContent className="p-0">
                   <div className="px-2 text-sm w-full grid gap-1.5">
-                    <div>
-                      <div className="font-medium" href="#">
-                        john
-                      </div>
-                      Wow, this reel is absolutely stunning! 😍✨
-                    </div>
-                    <div>
-                      <div className="font-medium" href="#">
-                        amelia
-                      </div>
-                      This post just made my day! 😃👍
-                    </div>
+            
+                      {artwork.description} 😃👍
+                  
                   </div>
+
                 </CardContent>
               </Card>
             </div>
@@ -178,7 +198,7 @@ export default function NewItem() {
         <>
           <ScrollArea className="h-[650px]">
             <div className="grid gap-4">
-              {artworks.map((artwork) => (
+             
                 <Card
                   key={artwork._id}
                   className="rounded-none shadow-none border-0"
@@ -253,7 +273,7 @@ export default function NewItem() {
                     </div>
                   </CardContent>
                 </Card>
-              ))}
+      
             </div>
           </ScrollArea>
         </>
@@ -311,11 +331,11 @@ export default function NewItem() {
                 <>
                   <CardFooter className="p-4 flex flex-row items-center justify-between">
                     {" "}
-                    {artworks.map((artwork) => (
+                    
                       <h2 className="text-lg font-semibold">
                         Price: ${artwork.price}
                       </h2>
-                    ))}
+
                   </CardFooter>
                 </>
               </Card>
@@ -323,6 +343,7 @@ export default function NewItem() {
           </ScrollArea>
         </div>
       </div>
+    ))}
     </div>
   );
 }

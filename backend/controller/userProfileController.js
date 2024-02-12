@@ -4,7 +4,7 @@ const ArtWork = require("../models/artWork");
 const getUserData = async (req, res) => {
   try {
     const userEmail = req.query.email;
-    console.log(userEmail)
+    //console.log(userEmail)
 
     if (!userEmail) {
       return res.status(400).json({ error: "Email parameter is missing" });
@@ -12,8 +12,8 @@ const getUserData = async (req, res) => {
 
     const user = await User.find({ email: userEmail });
 
-    console.log("--------------------------------")
-    console.log(user)
+    //console.log("--------------------------------")
+    //console.log(user)
     
     if (!user) {
       return res.status(404).json({ error: "User not found" });
@@ -41,7 +41,7 @@ const getUserArts = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    console.log("Current user Arts are as : ", { arts });
+   // console.log("Current user Arts are as : ", { arts });
     res.status(200).json(arts);
   } catch (error) {
     console.error(error);
