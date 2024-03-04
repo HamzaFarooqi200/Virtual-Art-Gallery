@@ -104,7 +104,9 @@ export default function NewItem() {
   console.log("artworks are as", artworks);
   return (
     <div>
+
       <Navbar />
+      <br></br>
       <br></br>
       <br></br>
       <br></br>

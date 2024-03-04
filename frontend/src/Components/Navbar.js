@@ -31,8 +31,8 @@ const Navbar = () => {
     <Disclosure as="nav" className="bg-green-400 text-black fixed w-full z-10">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 h-16">
-            <div className="relative flex items-center justify-between h-16">
+          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 h-20">
+            <div className="relative flex mt-4 items-center justify-between h-16">
               <div className="flex-shrink-0 flex items-center">
                 {/* Logo here */}
                 <img
@@ -47,8 +47,9 @@ const Navbar = () => {
                   <Link
                     to="/discoverArt"
                     className={classNames(
-                      "text-white ",
-                      "px-5 py-3 rounded-md text-sm font-medium"
+                      "text-white",
+                      "mr-2 px-4 py-2 rounded-md text-sm font-medium ",
+                      "fs-4"
                     )}
                   >
                     Discover Art
@@ -56,8 +57,9 @@ const Navbar = () => {
                 <Link
                   to="/VirtualGallery"
                   className={classNames(
-                    "text-white ",
-                    "px-5 py-3 rounded-md text-sm font-medium"
+                    "text-white",
+                    "mr-2 px-4 py-2 rounded-md text-sm font-medium",
+                    "fs-4"
                   )}
                 >
                   Virtual Exhibition 
@@ -65,8 +67,9 @@ const Navbar = () => {
                 <Link
                   to="/uploadArt"
                   className={classNames(
-                    "text-white ",
-                    "px-5 py-3 rounded-md text-sm font-medium"
+                    "text-white",
+                        "mr-2 px-4 py-2 rounded-md text-sm font-medium",
+                        "fs-4"
                   )}
                 >
                   Upload Art
@@ -74,8 +77,9 @@ const Navbar = () => {
                 <Link
                   to="/AddCart"
                   className={classNames(
-                    "text-white ",
-                    "px-5 py-3 rounded-md text-sm font-medium"
+                    "text-white",
+                        "mr-2 px-4 py-2 rounded-md text-sm font-medium ",
+                        "fs-4"
                   )}
                 >
                   Your Cart 
@@ -83,8 +87,9 @@ const Navbar = () => {
                 <Link
                   to="/team"
                   className={classNames(
-                    "text-white ",
-                    "px-5 py-3 rounded-md text-sm font-medium"
+                    "text-white",
+                    "mr-2 px-4 py-2 rounded-md text-sm font-medium ",
+                    "fs-4"
                   )}
                 >
                   Team
@@ -98,7 +103,8 @@ const Navbar = () => {
                       to="/signup"
                       className={classNames(
                         "text-white",
-                        "px-5 py-3 rounded-md text-sm font-medium bg-black"
+                        "px-6 py-3 rounded-md text-sm font-medium bg-black ",
+                        "fs-3"
                       )}
                     >
                       Sign Up
@@ -108,7 +114,8 @@ const Navbar = () => {
                       to="/login"
                       className={classNames(
                         "text-black",
-                        "px-5 py-3 rounded-md text-sm font-medium bg-white"
+                        "px-6 py-3 rounded-md text-sm font-medium bg-white",
+                        "fs-3"
                       )}
                     >
                       Login
@@ -129,10 +136,10 @@ const Navbar = () => {
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
                   <div>
-                    <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <Menu.Button className="bg-gray-800 flex text-sm rounded-circle focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
                       <img
-                        className="h-8 w-8 rounded-full"
+                        className="h-8 w-16 rounded-circle"
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
                       />

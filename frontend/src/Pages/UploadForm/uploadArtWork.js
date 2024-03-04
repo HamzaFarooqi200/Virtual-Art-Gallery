@@ -69,11 +69,13 @@ const UploadArtWork = () => {
   
 
   return (
-    <div>
-       <div className='nav'>
+    <>
+    <div className='nav'>
        <Navbar/>
        </div>
-    <div className="container1">
+       <br></br>
+       <br></br>
+    <div className="container1 ">
     <form className="form-container" onSubmit={handleSubmit}>
     <h2>UPLOAD ART</h2>
       <div className="row align-items-start">
@@ -217,7 +219,7 @@ const UploadArtWork = () => {
       </button>
     </form>
     </div>
-    </div>
+    </>
   );
 };
 export default UploadArtWork;
