@@ -9,7 +9,7 @@ router.post('/login', logInUser)
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, "C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/ProfileImage/")
+      cb(null, "C:/Users/Dell/Desktop/FYP/FYP/frontend/src/uploads/ProfileImage/")
     },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now();
