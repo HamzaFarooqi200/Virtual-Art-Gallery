@@ -16,6 +16,7 @@ import NewItem from "./Components/showArtcomponent/showArt";
 import useAuthenticationContextHook from "./Hooks/useAuthenticationContextHook";
 import ForgetPage from "./Pages/ForgetPage";
 import { AddCart } from "./Components/showArtcomponent/AddCart";
+//import ThreeModelViewer from "./Virtual Tour/virtualTour"
 
 import "./App.css";
 
@@ -31,7 +32,7 @@ const App = () => {
           /> */}
 
           <Route path="/" element={<Design />} />
-          <Route path="/AddCart" element={<AddCart />} />
+          <Route path="/AddCart" element={user ? <AddCart /> : <Navigate to="/login" />} />
 
           <Route
             path="/uploadArt"
@@ -64,6 +65,7 @@ const App = () => {
             path="/profile"
             element={user ? <Profile /> : <Navigate to="/login" />}
           />
+
         </Routes>
       </BrowserRouter>
     </div>

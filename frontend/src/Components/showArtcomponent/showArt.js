@@ -22,9 +22,9 @@ export default function NewItem() {
   const [artworks, setArtworks] = useState([]);
   const [hasError, setError] = useState(false);
 
-  // const [userDetails, setUserDetails] = useState({});
-  // const [userDetailsError, setUserDetailsError] = useState(false);
-
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  
+  
   const handleButtonClick = () => {
     console.log("Button clicked");
     setIsDropdownVisible((prevState) => !prevState);
@@ -62,6 +62,23 @@ export default function NewItem() {
   useEffect(() => {
     fetchArtworks();
   });
+
+  
+  // for handeling the functionlity of checbkoxes to filter the artworks
+  const handleCategoryChange = (category) => {
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(selectedCategories.filter((cat) => cat !== category));
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
+  };
+
+  const filteredArtworks = artworks.filter((artwork) =>
+    selectedCategories.length === 0
+      ? true // If no category is selected, show all artworks
+      : selectedCategories.includes(artwork.category)
+  );
+
 
   //add to art dunction
   async function addToCart(id, description, price, image) {
@@ -125,6 +142,7 @@ export default function NewItem() {
                   name="category1"
                   type="checkbox"
                   value="Category 1"
+                  onChange={() => handleCategoryChange("Painting")}
                 />
                 <label htmlFor="category1" className="text-lg">
                   Painting
@@ -138,6 +156,7 @@ export default function NewItem() {
                   name="category2"
                   type="checkbox"
                   value="Category 2"
+                  onChange={() => handleCategoryChange("Sketching")}
                 />
                 <label htmlFor="category2" className="text-lg">
                   Sketching
@@ -151,6 +170,7 @@ export default function NewItem() {
                   name="category3"
                   type="checkbox"
                   value="Category 3"
+                  onChange={() => handleCategoryChange("Photography")}
                 />
                 <label htmlFor="category3" className="text-lg">
                   Photography
@@ -164,6 +184,7 @@ export default function NewItem() {
                   name="category4"
                   type="checkbox"
                   value="Category 4"
+                  onChange={() => handleCategoryChange("Calligraphy")}
                 />
                 <label htmlFor="category4" className="text-lg">
                   Calligraphy
@@ -177,7 +198,7 @@ export default function NewItem() {
 
       <div className="container">
         <div className="row">
-          {artworks.map((artwork) => (
+        {filteredArtworks.map((artwork) => (
             <div className="col-md-12" key={artwork._id}>
               <ScrollArea className="border border-success-subtle">
                 
@@ -285,27 +306,6 @@ function BookmarkIcon(props) {
   );
 }
 
-// function FileWarningIcon(props) {
-//   return (
-//     <svg
-//       {...props}
-//       xmlns="http://www.w3.org/2000/svg"
-//       width="24"
-//       height="24"
-//       viewBox="0 0 24 24"
-//       fill="none"
-//       stroke="currentColor"
-//       strokeWidth="2"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//     >
-//       <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-//       <path d="M12 9v4" />
-//       <path d="M12 17h.01" />
-//     </svg>
-//   );
-// }
-
 function HeartIcon(props) {
   return (
     <svg
@@ -324,27 +324,6 @@ function HeartIcon(props) {
     </svg>
   );
 }
-
-// function MoreHorizontalIcon(props) {
-//   return (
-//     <svg
-//       {...props}
-//       xmlns="http://www.w3.org/2000/svg"
-//       width="24"
-//       height="24"
-//       viewBox="0 0 24 24"
-//       fill="none"
-//       stroke="currentColor"
-//       strokeWidth="2"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//     >
-//       <circle cx="12" cy="12" r="1" />
-//       <circle cx="19" cy="12" r="1" />
-//       <circle cx="5" cy="12" r="1" />
-//     </svg>
-//   );
-// }
 
 function ShoppingBagIcon(props) {
   return (
@@ -366,22 +345,3 @@ function ShoppingBagIcon(props) {
     </svg>
   );
 }
-
-// function StarIcon(props) {
-//   return (
-//     <svg
-//       {...props}
-//       xmlns="http://www.w3.org/2000/svg"
-//       width="18"
-//       height="18"
-//       viewBox="0 0 20 20"
-//       fill="none"
-//       stroke="currentColor"
-//       strokeWidth="2"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//     >
-//       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-//     </svg>
-//   );
-// }

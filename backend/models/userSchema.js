@@ -106,7 +106,7 @@ userSchema.statics.logIn= async (email , password) => {
     {
         throw Error("Incorrect Password")
     }
-    console.log("here ")
+    console.log("here in the log in function ")
     return user
 }
 
