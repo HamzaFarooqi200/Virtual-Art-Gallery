@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
    //Kabeers Path
     //cb(null, "C:/Users/Lenovo/OneDrive/Desktop/Final/FYP/frontend/src/uploads/")
     //jamshaid path
-    cb(null, "C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/")
+    cb(null, "C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/uploadedImages/")
     // waqas path
     //cb(null, "C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/ProfileImage/")
   },

@@ -233,7 +233,7 @@ export default function NewItem() {
                       <img
                         alt="Artwork Here"
                         className="object-cover w-full h-full"
-                        src={require(`../../uploads/${artwork.image}`)}
+                        src={require(`../../uploads/uploadedImages/${artwork.image}`)}
                         style={{ objectPosition: "center" }}
                       />
                     </div>
