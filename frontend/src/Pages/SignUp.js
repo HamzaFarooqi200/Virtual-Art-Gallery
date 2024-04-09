@@ -71,13 +71,21 @@ function SignUp() {
 
   return (
     <div>
+      <div>
       <Navbar />
+      </div>
+      <div>
+      <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
       <MDBContainer fluid>
         <MDBRow className="justify-content-center mt-10">
           <MDBCol md="6">
           <div className="d-flex flex-row ps-5 pt-5 mt-10">
-              <MDBIcon fas icon="crow fa-3x me-3" style={{ color: '#709085' }} />
-                <span className="h1 fw-bold mb-0">Logo</span>
+              <MDBIcon fas icon="user-plus fa-3x me-3" style={{ color: '#709085' }} />
+                <span className="h1 fw-bold mb-0">VAG</span>
           </div>
 
             <div className="d-flex flex-column pt-4">
@@ -178,6 +186,7 @@ function SignUp() {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
+      </div>
     </div>
   );
 }

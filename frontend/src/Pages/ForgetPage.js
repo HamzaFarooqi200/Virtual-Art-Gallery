@@ -1,93 +1,112 @@
-// PasswordResetForm.js
 import React, { useState } from 'react';
-import './forgetPage.css';
+import { MDBContainer, MDBRow, MDBCol, MDBIcon, MDBInput } from 'mdb-react-ui-kit';
+import { useForgotPassword } from "../Hooks/useForgotPassword"; 
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../Components/Navbar';
 
-const PasswordResetForm =  () => {
+function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const forgotPassword = useForgotPassword(); // Updated usage of useForgotPassword hook
 
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    
     if (newPassword !== confirmPassword) {
-      alert('Password does not match');
-    } else {
-      try {
-        const response = await fetch("/api/users/forgetPassword", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            email,
-            newPassword,
-            confirmPassword
-          })
-        });
-        
-        console.log(response)
-        
-        // Check if the request was successful (status code 200)
-        if (response.ok) {
-          console.log('Password reset successful');
-          navigate('/login');
-        } else {
-          // Handle errors if the request was not successful
-          console.error('Password reset failed');
-        }
-      } catch (error) {
-        console.error('Error during password reset:', error);
-      }
+      setError('Passwords do not match');
+      return;
     }
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      // Call the forgotPassword function from the hook
+      await forgotPassword(email, newPassword, confirmPassword, navigate);
+
+      // If successful, navigate to a confirmation page or handle accordingly
+      navigate('/login');
+    } catch (error) {
+      setError(error.message || 'Something went wrong. Please try again later.');
+    }
+
+    setIsLoading(false);
   };
-  
 
   return (
-    <div className="password-reset-form">
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email : </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="new-password">New Password : </label>
-          <input
-            type="password"
-            id="new-password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirm-password">Confirm Password : </label>
-          <input
-            type="password"
-            id="confirm-password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-       <div className='btn-container'>
+    <div>
+      <div>
+        <Navbar />
+      </div>
+      <div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div className="forgot-password-container">
+          <MDBContainer fluid>
+            <MDBRow className="justify-content-center">
+              <MDBCol md="6">
+                <div className="d-flex flex-row ps-5 pt-5 mt-10">
+                  <MDBIcon fas icon="lock fa-3x me-3" style={{ color: '#709085' }} />
+                  <span className="h1 fw-bold mb-0">Forgot Password</span>
+                </div>
 
-       <button className="myBtn" type="submit" onClick={handleSubmit}>
-          Reset Password
-        </button>
-       </div>
-      </form>
+                <div className="d-flex flex-column pt-4">
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="Email"
+                    id="formControlLg"
+                    type="email"
+                    size="lg"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                  />
+
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="New Password"
+                    id="formControlLg"
+                    type="password"
+                    size="lg"
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    value={newPassword}
+                  />
+
+                  <MDBInput
+                    wrapperClass="mb-4"
+                    label="Confirm Password"
+                    id="formControlLg"
+                    type="password"
+                    size="lg"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    value={confirmPassword}
+                  />
+
+                  <button
+                    className="custom-mdb-button"
+                    type="submit"
+                    disabled={isLoading}
+                    onClick={handleForgotPassword}
+                  >
+                    Reset Password
+                  </button>
+
+                  {error && <div className="error">{error}</div>}
+                </div>
+              </MDBCol>
+            </MDBRow>
+          </MDBContainer>
+        </div>
+      </div>
     </div>
   );
-};
+}
 
-export default PasswordResetForm;
+export default ForgotPassword;
