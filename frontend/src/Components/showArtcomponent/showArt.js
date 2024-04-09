@@ -61,7 +61,7 @@ export default function NewItem() {
 
   useEffect(() => {
     fetchArtworks();
-  });
+  },[]);
 
   
   // for handeling the functionlity of checbkoxes to filter the artworks

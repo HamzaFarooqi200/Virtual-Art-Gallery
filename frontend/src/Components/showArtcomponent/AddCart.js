@@ -32,7 +32,7 @@ export const AddCart = (props) => {
     const handleEmptyCart = async () => {
       try {
         const res = await fetch("api/carts/deleteAllCartItems", {
-          method: "DELETE", // Assuming you have a DELETE endpoint for emptying the cart
+          method: "DELETE", // The method is DELETE
         });
   
         if (res.ok) {
@@ -84,7 +84,7 @@ export const AddCart = (props) => {
                           <img
                            height={900}
                            width={900}
-                            src={require(`../../uploads/${item.image}`)}
+                            src={require(`../../uploads/uploadedImages/${item.image}`)}
                             alt={item.name} />
                             <h5 className="fs-1 text-bg-info text-white fw-bold mt-4 text-center">Price: {item.price}</h5>
                             </div>

@@ -5,8 +5,7 @@ const fs = require('fs-extra');
 
 const saveArtwork = async (req, res) => {
   try {
-    // // Extract data from the request
-    // console.log(req.body);
+    // Extract data from the request
     const { title, price, medium, style, category, ownership, description, uploadedBy } = req.body;
     const image = req.file.filename;
 
@@ -20,11 +19,14 @@ const saveArtwork = async (req, res) => {
     const loadedImage = await Jimp.read(req.file.path);
 
     // Load the watermark image using jimp
-    const watermark = await Jimp.read("C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/watermark/VAG.png"); 
+    const watermark = await Jimp.read("C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/watermark/watermarkimage.jpg"); 
 
-    // Calculate the position for the watermark (for example, bottom right corner)
+    // Reduce the size of the watermark
+    watermark.resize(100, Jimp.AUTO); // Adjust the size as needed
+
+    // Calculate the position for the watermark (top right corner)
     const x = loadedImage.bitmap.width - watermark.bitmap.width - 10; // 10 pixels margin from the right
-    const y = loadedImage.bitmap.height - watermark.bitmap.height - 10; // 10 pixels margin from the bottom
+    const y = 10; // 10 pixels margin from the top
 
     // Composite the watermark onto the loaded image
     loadedImage.composite(watermark, x, y, {
@@ -57,6 +59,7 @@ const saveArtwork = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
 
 const getAllArtworks = async (req, res) => {
   try {

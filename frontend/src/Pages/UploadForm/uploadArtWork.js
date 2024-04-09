@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import "./artForm.css"; 
 import Navbar from '../../Components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const UploadArtWork = () => {
-
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -25,12 +28,26 @@ const UploadArtWork = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // console.log('Image:', file);
+    // Validate amount to ensure it's not negative
+    const price = parseFloat(e.currentTarget.elements.price.value);
+    if (price < 0) {
+      setErrorMessage('Price cannot be negative.');
+      return;
+    }
+
+    // Check for empty fields
+    const requiredFields = ['title', 'artistType', 'price', 'medium', 'style', 'category', 'ownership', 'description'];
+    for (const field of requiredFields) {
+      if (!e.currentTarget.elements[field].value) {
+        setErrorMessage(`Please fill in the ${field} field.`);
+        return;
+      }
+    }
+
+    // Clear previous error message
+    setErrorMessage(null);
+
     // Create a FormData object to send the form data including the image file
-    const uploadedBy = localStorage.getItem('email');
-    console.log("----------------------------------- 1");
-    console.log(uploadedBy)
-    console.log("----------------------------------- 2");
     const formData = new FormData();
     formData.append('title', e.currentTarget.elements.title.value);
     formData.append('artistType', e.currentTarget.elements.artistType.value);
@@ -41,33 +58,38 @@ const UploadArtWork = () => {
     formData.append('ownership', e.currentTarget.elements.ownership.value);
     formData.append('description', e.currentTarget.elements.description.value);
     formData.append('image', file);
-    formData.append('uploadedBy', uploadedBy); 
-  
+    formData.append('uploadedBy', localStorage.getItem('email'));
+
     try {
       // Make a POST request to your API endpoint
       const response = await fetch('/api/artworks/upload', {
         method: 'POST',
         body: formData,
       });
-  
+
       // Handle the response
       if (response.ok) {
         // The artwork was successfully uploaded
         console.log('Artwork uploaded successfully');
+        // Clear form fields
+        if (e.currentTarget) {
+          e.currentTarget.reset();
+        }
+        setFile(null);
+        setPreview(null);
+
+        navigate('/discoverArt');
       } else {
         // Handle the error
         console.error('Failed to upload artwork');
+        setErrorMessage('Error uploading artwork. Please try again later.');
       }
     } catch (error) {
       console.error('Error during artwork upload:', error);
+      setErrorMessage('Error uploading artwork. Please try again later.');
     }
-  
-    // Clear the form after submission
-    setFile(null);
-    setPreview(null);
   };
   
-
   return (
     <>
     <div className='nav'>
@@ -213,6 +235,14 @@ const UploadArtWork = () => {
             </div>
           </div>
         )}
+
+         {/* Error message */}
+         {errorMessage && (
+            <div className="alert alert-danger" role="alert">
+              {errorMessage}
+            </div>
+          )}
+
 
        <button type="submit" className="btn btn-primary">
         Upload
