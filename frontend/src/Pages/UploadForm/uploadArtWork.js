@@ -80,9 +80,9 @@ const UploadArtWork = () => {
 
         navigate('/discoverArt');
       } else {
-        // Handle the error
-        console.error('Failed to upload artwork');
-        setErrorMessage('Error uploading artwork. Please try again later.');
+        const data = await response.json();
+        //console.error('Failed to upload artwork:', data.error);
+        setErrorMessage(data.error);
       }
     } catch (error) {
       console.error('Error during artwork upload:', error);

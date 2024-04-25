@@ -39,6 +39,7 @@ export default function NewItem() {
       const response = await fetch("api/artworks/allArtworks");
       const data = await response.json();
 
+      if (data !== null || data !== undefined) { 
       // Fetch user details for each artwork
       const artworksWithUserDetails = await Promise.all(
         data.map(async (artwork) => {
@@ -53,6 +54,11 @@ export default function NewItem() {
         })
       );
       setArtworks(artworksWithUserDetails);
+    }
+    else{
+      console.log("No data found");
+    }
+
       //console.log("These are the Artworks with user details: ", artworksWithUserDetails);
     } catch (error) {
       setError(error);
@@ -198,7 +204,7 @@ export default function NewItem() {
 
       <div className="container">
         <div className="row">
-        {filteredArtworks.map((artwork) => (
+        {filteredArtworks && filteredArtworks.map((artwork) => (
             <div className="col-md-12" key={artwork._id}>
               <ScrollArea className="border border-success-subtle">
                 

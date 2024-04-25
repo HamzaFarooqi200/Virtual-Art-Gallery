@@ -35,14 +35,20 @@ const Navbar = () => {
     async function fetchUserData() {
       setLoading(true);
       try {
+        console.log("in navbar Fetching user data for: ", user.email);
+
         const response = await fetch(`/api/userProfile/getUserProfileData?email=${user.email}`);
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
         }
         const data = await response.json();
+        
+        console.log("User data fetched: ", data);
+
         //console.log("User data fetched: ", data);
         setUserData(data);
         setLoading(false);
+  
       } catch (error) {
         console.error("Error fetching user data:", error);
         setError(error.message);
@@ -165,16 +171,17 @@ const Navbar = () => {
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-3 relative">
                     <div>
-                      <Menu.Button className="bg-gray-800 flex text-sm rounded-circle focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                        <span className="sr-only">Open user menu</span>
-                        {userData[0] && userData[0].image && (
-                          <img
-                            className="h-8 w-16 rounded-circle"
-                            src={require(`../uploads/ProfileImage/${userData[0].image}`)}
-                            alt=""
-                          />
-                        )}
-                      </Menu.Button>
+                        <Menu.Button className="bg-gray-800 flex text-sm rounded-circle focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                          <span className="sr-only">Open user menu</span>
+                          {userData && userData.length > 0 && userData[0].image && (
+                            <img
+                              className="h-8 w-16 rounded-circle"
+                              src={require(`../uploads/ProfileImage/${userData[0].image}`)}
+                              alt=""
+                            />
+                          )}
+                        </Menu.Button>
+
                     </div>
                     <Transition
                       as={Fragment}
