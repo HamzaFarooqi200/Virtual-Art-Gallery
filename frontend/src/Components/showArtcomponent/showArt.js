@@ -108,6 +108,35 @@ export default function NewItem() {
       });
       let data = await response.json();
       alert("Item Added To Cart");
+      //console.log("Cart item data here ");
+      //console.log(data);
+      //navigate("/AddCart");
+    } catch (err) {
+      alert("Something Went Wrong");
+      console.log(err);
+    }
+  }
+
+  //for shoping item
+  async function shope(id, description, price, image) {
+    const email = localStorage.getItem("email");
+    console.log(email);
+
+    try {
+      const response = await fetch("api/carts/uploadCart", {
+        method: "POST",
+        body: JSON.stringify({
+          currentUser: email,
+          artid: id,
+          price: price,
+          description: description,
+          image: image,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      let data = await response.json();
       console.log("Cart item data here ");
       console.log(data);
       navigate("/AddCart");
@@ -116,7 +145,6 @@ export default function NewItem() {
       console.log(err);
     }
   }
-
   const ProfileImage = styled.img`
     max-width: 80px;
     border: 1px solid #919191;
@@ -225,7 +253,7 @@ export default function NewItem() {
                     ))}
                   </div>
                   <div className="fs-3 mt-5 mb-2 ml-5">
-                    {artwork.description} 😃👍
+                    {artwork.description} {/*😃👍*/}
                   </div>
                   <hr></hr>
 
@@ -250,11 +278,6 @@ export default function NewItem() {
                     </div>
                     
                     <div className="flex justify-center mt-4">
-                      <Button className="btn btn-success mr-2" variant="ghost">
-                        <div className="flex items-center justify-center">
-                          <HeartIcon className="w-5 h-5" />
-                        </div>
-                      </Button>
                       <Button
                         className="btn btn-success mr-2 ml-2"
                         variant="ghost"
@@ -275,7 +298,17 @@ export default function NewItem() {
                       </Button>
                       <Button className="btn btn-success" variant="ghost">
                         <div className="flex items-center justify-center">
-                          <ShoppingBagIcon className="w-5 h-5" />
+                          <ShoppingBagIcon 
+                          className="w-5 h-5" 
+                          onClick={(e) =>
+                            shope(
+                              artwork._id,
+                              artwork.description,
+                              artwork.price,
+                              artwork.image
+                            )
+                          }
+                          />
                         </div>
                       </Button>
                     </div>
