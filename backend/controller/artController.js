@@ -48,22 +48,19 @@ const saveArtwork = async (req, res) => {
     //console.log("dummy image path : ",req.file.path);
 
     // Path to store original image
-    const imagePathToCheck = `C:/Users/Lenovo/OneDrive/Desktop/FYP/frontend/src/uploads/orignalimages`;
+    const imagePathToCheck = `C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/orignalimages/`;
 
     const files = await fs.readdir(imagePathToCheck);
     for (const file of files) {
       console.log("file : ",file);
-        const similarity = await calculateCosineSimilarity(
-          dummyImagePath,
-          `C:/Users/Lenovo/OneDrive/Desktop/FYP/frontend/src/uploads/orignalimages/${file}`
-        );
+        const similarity = await calculateCosineSimilarity(dummyImagePath, `C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/orignalimages/${file}`);
         console.log("similarity : ",similarity)
         if (similarity >= 0.99) {
             // If similarity is above threshold, it's a duplicate
             return res.status(400).json({ error: 'Duplicate image found' });
         }
     }
-    const originalImagePath = `C:/Users/Lenovo/OneDrive/Desktop/FYP/frontend/src/uploads/orignalimages/${req.file.filename}`;
+    const originalImagePath = `C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/orignalimages/${req.file.filename}`
     // Copy the uploaded image to the directory without watermark
     await fs.copy(req.file.path, originalImagePath);
 
@@ -72,13 +69,7 @@ const saveArtwork = async (req, res) => {
     const loadedImage = await Jimp.read(req.file.path);
 
     // Load the watermark image using jimp
-<<<<<<< HEAD
     const watermark = await Jimp.read("C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/watermark/watermark.png");
-=======
-    const watermark = await Jimp.read(
-      "C:/Users/Lenovo/OneDrive/Desktop/FYP/frontend/src/uploads/watermark/watermarkimage.jpg"
-    );
->>>>>>> fe3bf42c6fb24b77b147c01cfe86f65e5f33f859
 
     // Resize the watermark to match the dimensions of the uploaded image
     watermark.resize(loadedImage.bitmap.width, loadedImage.bitmap.height);
@@ -90,8 +81,7 @@ const saveArtwork = async (req, res) => {
     });
 
     // Path to store the modified image
-    //const uploadedImagePath = `C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/uploadedimages/${req.file.filename}`;
-    const uploadedImagePath = `C:/Users/Lenovo/OneDrive/Desktop/FYP/frontend/src/uploads/uploadedimages/${req.file.filename}`;
+    const uploadedImagePath = `C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/uploadedimages/${req.file.filename}`;
     // Save the modified image
     await loadedImage.writeAsync(uploadedImagePath);
 

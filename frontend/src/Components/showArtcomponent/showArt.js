@@ -155,6 +155,7 @@ export default function NewItem() {
   console.log("artworks are as", artworks);
   return (
     <div>
+
       <Navbar />
       <br></br>
       <br></br>
@@ -231,10 +232,10 @@ export default function NewItem() {
 
       <div className="container">
         <div className="row">
-          {filteredArtworks &&
-            filteredArtworks.map((artwork) => (
-              <div className="col-md-12" key={artwork._id}>
-                <ScrollArea className="border border-success-subtle">
+        {filteredArtworks && filteredArtworks.map((artwork) => (
+            <div className="col-md-12" key={artwork._id}>
+              <ScrollArea className="border border-success-subtle">
+                
                   <div className="ml-20 flex items-center gap-5 text-sm font-semibold">
                     {artwork.userDetails.map((userDetail) => (
                       <div
@@ -256,7 +257,6 @@ export default function NewItem() {
                   </div>
                   <hr></hr>
 
-<<<<<<< HEAD
                 <div className="col-md-11 ml-10 mr-10 border border-black">
                   <Card
                     key={artwork._id}
@@ -332,71 +332,14 @@ export default function NewItem() {
                         </div>
                       </Button>
                     </div>
-=======
-                  <div className="col-md-11 ml-10 mr-10 border border-black">
-                    <Card
-                      key={artwork._id}
-                      className="rounded-none shadow-none border-2"
-                    >
-                      <div className="aspect-ratio aspect-w-16 aspect-h-9 flex justify-center items-center">
-                        <img
-                          alt="Artwork Here"
-                          className="object-cover w-90 h-90"
-                          src={require(`../../uploads/uploadedImages/${artwork.image}`)}
-                          style={{ objectPosition: "center" }}
-                        />
-                      </div>
->>>>>>> fe3bf42c6fb24b77b147c01cfe86f65e5f33f859
 
-                      <hr />
-
-                      <div className="fw-bolder text-center">
-                        <h1>Price: ${artwork.price}</h1>
-                      </div>
-
-                      <div className="flex justify-center mt-4">
-                        <Button
-                          className="btn btn-success mr-2 ml-2"
-                          variant="ghost"
-                        >
-                          <div className="flex items-center justify-center">
-                            <BookmarkIcon
-                              className="w-5 h-5"
-                              onClick={(e) =>
-                                addToCart(
-                                  artwork._id,
-                                  artwork.description,
-                                  artwork.price,
-                                  artwork.image
-                                )
-                              }
-                            />
-                          </div>
-                        </Button>
-                        <Button className="btn btn-success" variant="ghost">
-                          <div className="flex items-center justify-center">
-                            <ShoppingBagIcon
-                              className="w-5 h-5"
-                              onClick={(e) =>
-                                shope(
-                                  artwork._id,
-                                  artwork.description,
-                                  artwork.price,
-                                  artwork.image
-                                )
-                              }
-                            />
-                          </div>
-                        </Button>
-                      </div>
-
-                      <br></br>
-                    </Card>
-                  </div>
-                  <br></br>
-                </ScrollArea>
-              </div>
-            ))}
+                    <br></br>
+                  </Card>
+                </div>
+                <br></br>
+              </ScrollArea>
+            </div>
+          ))}
         </div>
       </div>
     </div>
