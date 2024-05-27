@@ -120,11 +120,15 @@ export const Design = () => {
                   </p>
                   <button className="button">
                     <div className="contact-us-wrapper">
+<<<<<<< HEAD
                       <div className="contact-us"> 
                       <Link class="text-white" to="/team">
                         CONTACT US
                         </Link>
                         </div>
+=======
+                      <div className="contact-us">CONTACT US</div>
+>>>>>>> fe3bf42c6fb24b77b147c01cfe86f65e5f33f859
                     </div>
                   </button>
                   <div className="why-us-cards">
@@ -239,11 +243,15 @@ export const Design = () => {
                             </button>
                             <button className="BUTTON-2">
                               <div className="overlap-7">
+<<<<<<< HEAD
                                 <div className="text-wrapper-19">
                                   <Link class="text-white" to="/team">
                                     CONTACT
                                   </Link>
                                   </div>
+=======
+                                <div className="text-wrapper-19">CONTACT</div>
+>>>>>>> fe3bf42c6fb24b77b147c01cfe86f65e5f33f859
                               </div>
                             </button>
                           </div>

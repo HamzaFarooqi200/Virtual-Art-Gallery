@@ -68,7 +68,11 @@ const FooterComponent = () => {
           <Item>
             <FooterLinks>
               <Label>
+<<<<<<< HEAD
                 <Link className="text-white" to="/AddCart">
+=======
+                <Link className="text-white" to="/discoverArt">
+>>>>>>> fe3bf42c6fb24b77b147c01cfe86f65e5f33f859
                   Shoping Cart
                 </Link>
               </Label>
@@ -101,6 +105,61 @@ const FooterComponent = () => {
             </MobileApp>
           </Links>
         </PopularTag>
+<<<<<<< HEAD
+=======
+        {/* <PopularTag>
+            <Category1>Popular Tag</Category1>
+            <Tag2>
+              <Row>
+                <Tag3>
+                  <Label>Game</Label>
+                </Tag3>
+                <Tag3>
+                  <Label>iPhone</Label>
+                </Tag3>
+                <Tag3>
+                  <Label>TV</Label>
+                </Tag3>
+                <Tag3>
+                  <Label>Asus Laptops</Label>
+                </Tag3>
+              </Row>
+              <Row>
+                <Tag3>
+                  <Label>{`Macbook `}</Label>
+                </Tag3>
+                <Tag3>
+                  <Label>SSD</Label>
+                </Tag3>
+                <Tag4>
+                  <Label>{`Graphics Card `}</Label>
+                </Tag4>
+              </Row>
+              <Row>
+                <Tag3>
+                  <Label>{`Power Bank `}</Label>
+                </Tag3>
+                <Tag3>
+                  <Label>Smart TV</Label>
+                </Tag3>
+                <Tag3>
+                  <Label>Speaker</Label>
+                </Tag3>
+              </Row>
+              <Row>
+                <Tag3>
+                  <Label>Tablet</Label>
+                </Tag3>
+                <Tag3>
+                  <Label>Microwave</Label>
+                </Tag3>
+                <Tag3>
+                  <Label>Samsung</Label>
+                </Tag3>
+              </Row>
+            </Tag2>
+          </PopularTag> */}
+>>>>>>> fe3bf42c6fb24b77b147c01cfe86f65e5f33f859
       </Footer>
       <Copyright>
         <KinboEcommerce>
