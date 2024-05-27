@@ -19,6 +19,10 @@ text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 function ViewDashboard() {
   return (
     <ViewDashboardWrapper>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       <ViewDashboardText>Artist Profile</ViewDashboardText>
     </ViewDashboardWrapper>
   );

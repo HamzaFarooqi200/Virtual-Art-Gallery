@@ -29,9 +29,13 @@ function Login() {
     setEmail('');
     setPassword('');
     
-    if (!error) {
+    if (error) { // Check if there's an error
+      // Display the error
+      console.log("this error occure at login",error);
+    } else{
       navigate('/discoverArt');
     }
+    
   };
 
   return (
@@ -89,11 +93,6 @@ function Login() {
           </div>
 
         </MDBCol>
-
-        {/* <MDBCol sm='6' className='d-none d-sm-block px-0' style={{ marginTop: '100px' }}>
-          <img src={image}
-            alt="Login image" className="w-100" style={{objectFit: 'cover', objectPosition: 'left', maxHeight: '650px'}} />
-        </MDBCol> */}
 
       </MDBRow>
 

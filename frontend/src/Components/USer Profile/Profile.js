@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ViewDashboard from "./ViewDashboard";
 import ProfileDetails from "./ProfileDetails";
 import About from "./About";
-import ProfileButtons from "./ProfileButtons";
+//import ProfileButtons from "./ProfileButtons";
 // import Highlights from "./Highlights";
 //import TopNav from "./TopNav";
 import PostGrid from "./PostGrid";
@@ -89,15 +89,16 @@ function Profile() {
         {userProfile.length > 0 && userArts.length > 0 ? (
           <ProfileDetails  userProfile={userProfile}  userArts={userArts} />
         ) : (
-          <p>Loading...</p>
+          <p>No Data Available</p>
         )}
         
         {userProfile.length > 0 ? (
           <About userProfile={userProfile} />
+          
         ) : (
           <p>Loading...</p>
         )}
-        <ProfileButtons />
+        
         {userArts.length > 0 ? ( <PostGrid  userArts={userArts}/> ): ( <p>Loading...</p> )}
       </ProfileWrapper>
     </div>

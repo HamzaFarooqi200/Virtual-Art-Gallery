@@ -6,7 +6,7 @@ import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
 import Team from "./Pages/Team";
 import Profile from "./Components/USer Profile/Profile";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate , useLocation} from "react-router-dom";
 //import Home from './Pages/Home';
 //import Navbar from './Components/Navbar';
 // import { useLogout } from './Hooks/useLogout';
@@ -16,7 +16,7 @@ import NewItem from "./Components/showArtcomponent/showArt";
 import useAuthenticationContextHook from "./Hooks/useAuthenticationContextHook";
 import ForgetPage from "./Pages/ForgetPage";
 import { AddCart } from "./Components/showArtcomponent/AddCart";
-//import ThreeModelViewer from "./Virtual Tour/virtualTour"
+import OTPVerification from "./Pages/OTPVerification";
 
 import "./App.css";
 
@@ -52,6 +52,11 @@ const App = () => {
             path="/signup"
             element={!user ? <SignUp /> : <Navigate to="/login" />}
           />
+
+          <Route 
+          path="/otpVerification" 
+          element= {<OTPVerification />} />
+
           <Route path="/forgetPage" element={<ForgetPage />} />
           <Route
             path="/login"
@@ -65,7 +70,7 @@ const App = () => {
             path="/profile"
             element={user ? <Profile /> : <Navigate to="/login" />}
           />
-
+          
         </Routes>
       </BrowserRouter>
     </div>

@@ -73,8 +73,8 @@ const Navbar = () => {
               <div className="flex-shrink-0 flex items-center">
                 {/* Logo here */}
                 <img
-                  className="hidden lg:block h-8 w-auto text-white"
-                  src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                  className="hidden lg:block h-10  text-white"
+                  src={require("../uploads/watermark/VAG.png")}
                   alt="VAG"
                 />
               </div>
@@ -92,7 +92,7 @@ const Navbar = () => {
                       Discover Art
                     </Link>
                     <Link
-                      to="/VirtualGallery"
+                      to="http://192.168.43.5:8081"
                       className={classNames(
                         "text-white",
                         "mr-2 px-4 py-2 rounded-md text-sm font-medium",

@@ -8,143 +8,106 @@ import styled from "styled-components";
 const FooterComponent = () => {
   return (
     <Footer1>
-        <Footer>
-          <CliconEcommerce>
-            <Logo>
-              <Icon alt="" src="/icon.svg" />
-              <Clicon>VAG</Clicon>
-            </Logo>
-            <ContactInfo>
-              <PhoneNumber>
-                <CustomerSupports>Customer Supports:</CustomerSupports>
-                <Div8>(629) 555-0129</Div8>
-              </PhoneNumber>
-              <WashingtonAveManchester>
-                4517 Washington Ave. Manchester, Kentucky 39495
-              </WashingtonAveManchester>
-              <Infokinbocom>info@kinbo.com</Infokinbocom>
-            </ContactInfo>
-          </CliconEcommerce>
-          <TopCategory>
-            <DownloadApp>Top Category</DownloadApp>
-            <Item>
-              <FooterLinks>
-                <Label>{`Computer & Laptop`}</Label>
-              </FooterLinks>
-              <FooterLinks>
-                <Label>SmartPhone</Label>
-              </FooterLinks>
-              <FooterLinks>
-                <Label>Headphone</Label>
-              </FooterLinks>
-              <FooterLinks1>
-                <Devider />
-                <Label>Accessories</Label>
-              </FooterLinks1>
-              <FooterLinks>
-                <Label>{`Camera & Photo`}</Label>
-              </FooterLinks>
-              <FooterLinks>
-                <Label>{`TV & Homes`}</Label>
-              </FooterLinks>
-              <Button5>
-                <Label>Browse All Product</Label>
+      <Footer>
+        <CliconEcommerce>
+          <Logo>
+            <Icon alt="" src="/icon.svg" />
+            <Clicon>VAG</Clicon>
+          </Logo>
+          <ContactInfo>
+            <PhoneNumber>
+              <CustomerSupports>Customer Supports:</CustomerSupports>
+              <Div8>(629) 555-0129</Div8>
+            </PhoneNumber>
+            <WashingtonAveManchester>
+              4517 Washington Ave. Manchester, Kentucky 39495
+            </WashingtonAveManchester>
+            <Infokinbocom>infovag@kinbo.com</Infokinbocom>
+          </ContactInfo>
+        </CliconEcommerce>
+        <TopCategory>
+          <DownloadApp>Top ART Category</DownloadApp>
+          <Item>
+            <FooterLinks>
+              <Devider />
+              <Label>{`Calligraphy Artworks`}</Label>
+            </FooterLinks>
+            <FooterLinks>
+              <Label>Painting Artworks</Label>
+            </FooterLinks>
+            <FooterLinks>
+              <Label>Sketching Artworks</Label>
+            </FooterLinks>
+            <FooterLinks1>
+              <Devider />
+              <Label>Photography Artworks</Label>
+            </FooterLinks1>
+            <FooterLinks>
+              <Label>{`VAG for Fairs`}</Label>
+            </FooterLinks>
+            <FooterLinks>
+              <Label>{`VAG for Exhibitions`}</Label>
+            </FooterLinks>
+            <Button5>
+              <Label>
+                <Link className="text-white" to="/discoverArt">
+                  Browse All Artworks
+                </Link>
+              </Label>
+              <Link className="text-white" to="/discoverArt">
                 <RegularmagnifyingglassIcon
                   alt=""
                   src="/regulararrowright.svg"
                 />
-              </Button5>
-            </Item>
-          </TopCategory>
-          <TopCategory>
-            <DownloadApp>Quick links</DownloadApp>
-            <Item>
-              <FooterLinks>
-                <Label><Link to="/discoverArt">Shoping Cart</Link></Label>
-              </FooterLinks>
-              <FooterLinks>
-                <Label><Link to="/team">About Us </Link></Label>
-              </FooterLinks>
-            </Item>
-          </TopCategory>
-          <PopularTag>
-            <DownloadApp>Download APp</DownloadApp>
-            <Links>
-              <MobileApp>
-                <AppleNegative1Icon alt="" src="/icongoogleplay-1.svg" />
-                <Info1>
-                  <GetItNow>Get it now</GetItNow>
-                  <GooglePlay>Google Play</GooglePlay>
-                </Info1>
-              </MobileApp>
-              <MobileApp>
-                <AppleNegative1Icon alt="" src="/applenegative-1.svg" />
-                <Info1>
-                  <GetItNow>Get it now</GetItNow>
-                  <GooglePlay>App Store</GooglePlay>
-                </Info1>
-              </MobileApp>
-            </Links>
-          </PopularTag>
-          {/* <PopularTag>
-            <Category1>Popular Tag</Category1>
-            <Tag2>
-              <Row>
-                <Tag3>
-                  <Label>Game</Label>
-                </Tag3>
-                <Tag3>
-                  <Label>iPhone</Label>
-                </Tag3>
-                <Tag3>
-                  <Label>TV</Label>
-                </Tag3>
-                <Tag3>
-                  <Label>Asus Laptops</Label>
-                </Tag3>
-              </Row>
-              <Row>
-                <Tag3>
-                  <Label>{`Macbook `}</Label>
-                </Tag3>
-                <Tag3>
-                  <Label>SSD</Label>
-                </Tag3>
-                <Tag4>
-                  <Label>{`Graphics Card `}</Label>
-                </Tag4>
-              </Row>
-              <Row>
-                <Tag3>
-                  <Label>{`Power Bank `}</Label>
-                </Tag3>
-                <Tag3>
-                  <Label>Smart TV</Label>
-                </Tag3>
-                <Tag3>
-                  <Label>Speaker</Label>
-                </Tag3>
-              </Row>
-              <Row>
-                <Tag3>
-                  <Label>Tablet</Label>
-                </Tag3>
-                <Tag3>
-                  <Label>Microwave</Label>
-                </Tag3>
-                <Tag3>
-                  <Label>Samsung</Label>
-                </Tag3>
-              </Row>
-            </Tag2>
-          </PopularTag> */}
-        </Footer>
-        <Copyright>
-          <KinboEcommerce>
-          © 2021 Virtual Art Gallery. All rights reserved
-          </KinboEcommerce>
-        </Copyright>
-      </Footer1>
+              </Link>
+            </Button5>
+          </Item>
+        </TopCategory>
+        <TopCategory>
+          <DownloadApp>Quick links</DownloadApp>
+          <Item>
+            <FooterLinks>
+              <Label>
+                <Link className="text-white" to="/AddCart">
+                  Shoping Cart
+                </Link>
+              </Label>
+            </FooterLinks>
+            <FooterLinks>
+              <Label>
+                <Link className="text-white" to="/team">
+                  About Us{" "}
+                </Link>
+              </Label>
+            </FooterLinks>
+          </Item>
+        </TopCategory>
+        <PopularTag>
+          <DownloadApp>Download APP</DownloadApp>
+          <Links>
+            <MobileApp>
+              <AppleNegative1Icon alt="" src="/icongoogleplay-1.svg" />
+              <Info1>
+                <GetItNow>Get it now</GetItNow>
+                <GooglePlay>Google Play</GooglePlay>
+              </Info1>
+            </MobileApp>
+            <MobileApp>
+              <AppleNegative1Icon alt="" src="/applenegative-1.svg" />
+              <Info1>
+                <GetItNow>Get it now</GetItNow>
+                <GooglePlay>App Store</GooglePlay>
+              </Info1>
+            </MobileApp>
+          </Links>
+        </PopularTag>
+      </Footer>
+      <Copyright>
+        <KinboEcommerce>
+          © 2024 Virtual Art Gallery. All rights reserved
+        </KinboEcommerce>
+      </Copyright>
+    </Footer1>
   );
 };
 
@@ -265,6 +228,8 @@ const DownloadApp = styled.div`
   text-transform: uppercase;
   font-weight: 500;
   display: inline-block;
+  font-weight: bold
+  color:white
 `;
 const FooterLinks = styled.div`
   display: flex;
@@ -395,6 +360,9 @@ const Footer = styled.div`
   justify-content: flex-start;
   padding: var(--padding-53xl) var(--padding-281xl);
   box-sizing: border-box;
+  gap: var(--gap-5xl);
+  padding: var(--padding-53xl) var(--padding-281xl) var(--padding-base)
+    var(--padding-281xl); /* Adjusted padding */
   gap: var(--gap-5xl);
 `;
 const KinboEcommerce = styled.div`

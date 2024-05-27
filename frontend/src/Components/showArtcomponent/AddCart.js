@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
+import FooterComponent from "../Footer/Footer";
 
 export const AddCart = (props) => {
   const [carts, setCarts] = useState([]);
@@ -57,20 +58,7 @@ export const AddCart = (props) => {
         <Navbar />
         <br></br>
        <br></br>
-    
-    {/* <section>
-      <div className="banner-innerpage">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-6 align-self-center text-center">
-              <h1 className="title">Cart Listing</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> */}
-   
-        
+            
        <div className="border border-black">
        <h1 className="text-uppercase fs-1 fw-bold text-center text-bg-info text-white h-100 mt-14">Cart Listing</h1>
         
@@ -86,7 +74,7 @@ export const AddCart = (props) => {
                            width={900}
                             src={require(`../../uploads/uploadedImages/${item.image}`)}
                             alt={item.name} />
-                            <h5 className="fs-1 text-bg-info text-white fw-bold mt-4 text-center">Price: {item.price}</h5>
+                            <h5 className="fs-1 text-bg-info text-white fw-bold mt-4 text-center">Price: $ {item.price}</h5>
                             </div>
                             {/* <h5 className="font-medium m-b-30  fs-1">
                               {item.price}
@@ -101,25 +89,9 @@ export const AddCart = (props) => {
                       <h5 className="fs-1 fw-bold mt-3 text-center">No items in the cart</h5>
                     </div>
                     )}:
-       
-                   
-                      
-       {/* <div className="container flex">
-  <div className="container text-bg-success text-white justify-content-center">
-    <h5 className="fs-1 fw-bold mt-3 text-center">Subtotal: {payload.subTotal}</h5>
-  </div>
-  <div className="container w-100 d-flex justify-content-center align-items-center">
-    <button
-      className="btn btn-danger btn-lg" // You can adjust the button size as needed
-      onClick={handleEmptyCart}
-    >
-      Empty cart
-    </button>
-  </div>
-</div> */}
 
 <div className="container text-bg-info text-white justify-content-center">
-    <h5 className="fs-1 fw-bold mt-3 text-center">Subtotal: {payload.subTotal}</h5>
+    <h5 className="fs-1 fw-bold mt-3 text-center">Subtotal: $ {payload.subTotal}</h5>
   </div>
   <div className="container w-25 d-flex justify-content-center align-items-center">
     <button
@@ -129,14 +101,9 @@ export const AddCart = (props) => {
       Empty cart
     </button>
   </div>                 
-                        
+
+<FooterComponent />
        </div>
-                      
-                    
-        
-        
-    
-    
                
        </React.Fragment>
     

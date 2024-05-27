@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const ButtonWrapper = styled.div`
@@ -18,7 +19,7 @@ const Button = styled.button`
   border: 1px solid #919191;
   padding: 12px 0;
   cursor: pointer;
-  width: 50%; 
+  width: 100%; 
   height: 40px; 
   border-radius: 5px;
   font-size: 14px;
@@ -27,13 +28,25 @@ const Button = styled.button`
   }
 `;
 
-function ProfileButtons() {
+function ProfileButtons(userProfile) {
+
+  // console.log("Type of userProfile:", typeof userProfile);
+  //console.log("Length of userProfile:", userProfile['userProfile']);
+
+  if (!userProfile || userProfile.length === 0) {
+    return null; // or display a loading message
+  }
+
+  const user = userProfile['userProfile'];
+  //console.log("user in profile is as:",user[0]._id);
+  
   return (
     <ButtonWrapper>
       <ButtonRow>
         <Button>Edit Profile</Button>
-        <Button>Contact</Button>
+        {/* <Button>Contact</Button> */}
       </ButtonRow>
+
     </ButtonWrapper>
   );
 }

@@ -283,7 +283,17 @@ export default function NewItem() {
                         variant="ghost"
                       >
                         <div className="flex items-center justify-center">
-                          <BookmarkIcon
+                          <span onClick={(e) =>
+                              addToCart(
+                                artwork._id,
+                                artwork.description,
+                                artwork.price,
+                                artwork.image
+                              )
+                             }>
+                              Add to Cart
+                             </span>
+                          {/* <BookmarkIcon
                             className="w-5 h-5"
                             onClick={(e) =>
                               addToCart(
@@ -293,12 +303,22 @@ export default function NewItem() {
                                 artwork.image
                               )
                             }
-                          />
+                          /> */}
                         </div>
                       </Button>
                       <Button className="btn btn-success" variant="ghost">
                         <div className="flex items-center justify-center">
-                          <ShoppingBagIcon 
+                          <span onClick={(e) =>
+                            shope(
+                              artwork._id,
+                              artwork.description,
+                              artwork.price,
+                              artwork.image
+                            )
+                          }>
+                            Shop
+                          </span>
+                          {/* <ShoppingBagIcon 
                           className="w-5 h-5" 
                           onClick={(e) =>
                             shope(
@@ -308,7 +328,7 @@ export default function NewItem() {
                               artwork.image
                             )
                           }
-                          />
+                          /> */}
                         </div>
                       </Button>
                     </div>

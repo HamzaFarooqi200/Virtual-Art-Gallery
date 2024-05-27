@@ -9,11 +9,12 @@ import kabeerPic from "../images/kabeerPic.jpg";
 import waqasPic from "../images/waqasPic.jpg";
 import hassamPic from "../images/hassamPic.jpg";
 import Navbar from "../Components/Navbar";
-
+import FooterComponent from "../Components/Footer/Footer";
 
 
 const AboutUs = () => {
   return (
+    <div>
     <div>
       <Navbar/>
     <div className="about-us">
@@ -119,6 +120,8 @@ const AboutUs = () => {
         </div>
       </div>
     </div>
+    </div>
+    <FooterComponent/>
     </div>
   );
 };

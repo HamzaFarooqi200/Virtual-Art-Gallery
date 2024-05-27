@@ -55,7 +55,7 @@ const saveArtwork = async (req, res) => {
       console.log("file : ",file);
         const similarity = await calculateCosineSimilarity(dummyImagePath, `C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/orignalimages/${file}`);
         console.log("similarity : ",similarity)
-        if (similarity >= 0.98) {
+        if (similarity >= 0.99) {
             // If similarity is above threshold, it's a duplicate
             return res.status(400).json({ error: 'Duplicate image found' });
         }
@@ -69,19 +69,15 @@ const saveArtwork = async (req, res) => {
     const loadedImage = await Jimp.read(req.file.path);
 
     // Load the watermark image using jimp
-    const watermark = await Jimp.read("C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/watermark/watermarkimage.jpg");
+    const watermark = await Jimp.read("C:/Users/jamsh/Desktop/FYP/FYP/frontend/src/uploads/watermark/watermark.png");
 
-    // Reduce the size of the watermark
-    watermark.resize(100, Jimp.AUTO); // Adjust the size as needed
-
-    // Calculate the position for the watermark (top right corner)
-    const x = loadedImage.bitmap.width - watermark.bitmap.width - 10; // 10 pixels margin from the right
-    const y = 10; // 10 pixels margin from the top
+    // Resize the watermark to match the dimensions of the uploaded image
+    watermark.resize(loadedImage.bitmap.width, loadedImage.bitmap.height);
 
     // Composite the watermark onto the loaded image
-    loadedImage.composite(watermark, x, y, {
-    mode: Jimp.BLEND_SOURCE_OVER,
-    opacitySource: 0.5 // Adjust the opacity of the watermark as needed
+    loadedImage.composite(watermark, 0, 0, {
+      mode: Jimp.BLEND_SOURCE_OVER,
+      opacitySource: 0.5 // Adjust the opacity of the watermark as needed
     });
 
     // Path to store the modified image

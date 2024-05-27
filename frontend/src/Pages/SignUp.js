@@ -6,6 +6,7 @@ import { useSignUp } from '../Hooks/useSignUp';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 
+
 function SignUp() {
   const [preview, setPreview] = useState(null);
   const [file, setFile] = useState(null);
@@ -64,9 +65,12 @@ function SignUp() {
     setFile(null);
     setPreview(null);
 
+    // In the SignUp component, after successful sign-up
     if (!error) {
-      navigate('/discoverArt');
+      console.log('Email for the OTP:', email);
+      navigate('/otpVerification', { state: { email } });
     }
+    
   };
 
   return (

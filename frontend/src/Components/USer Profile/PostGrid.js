@@ -21,7 +21,7 @@ function PostGrid({ userArts }) {
       {userArts.map((artwork, index) => (
         <img
           key={index}
-          src={require(`../../uploads/${artwork.image}`)}
+          src={require(`../../uploads/uploadedImages/${artwork.image}`)}
           alt={artwork.title}
         />
       ))}
