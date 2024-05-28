@@ -34,4 +34,29 @@ router.post('/verify-otp', async (req, res) => {
   }
 });
 
+
+router.post('/send-otp', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const result = await User.sendOtpForPasswordReset(email);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error("Error sending OTP:", error);
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.post('/reset-password', async (req, res) => {
+  const { email, otp, newPassword } = req.body;
+
+  try {
+    const result = await User.resetPassword(email, otp, newPassword);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error("Error resetting password:", error);
+    res.status(400).json({ error: error.message });
+  }
+});
+
 module.exports = router;

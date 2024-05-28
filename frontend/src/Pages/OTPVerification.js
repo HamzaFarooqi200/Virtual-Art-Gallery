@@ -44,6 +44,7 @@ const OTPVerification = () => {
         }
       } else {
         const text = await response.text();
+        console.log("----------------------",text);
         throw new Error(`Unexpected content type: ${contentType}\nResponse body: ${text}`);
       }
     } catch (err) {

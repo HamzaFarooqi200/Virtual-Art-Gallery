@@ -73,8 +73,8 @@ userSchema.statics.signUp = async (firstName, lastName, email, password, dateOfB
       host: 'smtp.ethereal.email',
       port: 587,
       auth: {
-        user: 'kaylee.mohr84@ethereal.email',
-        pass: '49c2BTQBuCuZtY8nwJ'
+        user: 'ralph.aufderhar@ethereal.email',
+        pass: 'p61pubm9Rfju3Er91R'
       }
     });
 
@@ -155,6 +155,72 @@ userSchema.statics.logIn = async (email, password) => {
   }
   return user;
 }
+
+userSchema.statics.sendOtpForPasswordReset = async function (email) {
+  const user = await this.findOne({ email });
+
+  if (!user) {
+    throw new Error("User does not exist");
+  }
+
+  const otp = Math.floor(1000 + Math.random() * 9000).toString();
+  const otpExpires = new Date(Date.now() + 15 * 60 * 1000); // OTP expires in 15 minutes
+
+  // Sending email
+  try {
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      auth: {
+        user: 'ralph.aufderhar@ethereal.email',
+        pass: 'p61pubm9Rfju3Er91R'
+      }
+    });
+
+    const info = await transporter.sendMail({
+      from: '"VAG 👻" <VAG@gmail.com>',
+      to: email,
+      subject: "OTP Verification for Password Reset",
+      text: otp,
+      html: `<b>VAG ltd.</b><br><br>Your OTP is: ${otp}`,
+    });
+
+    if (info.messageId) {
+      user.otp = otp;
+      user.otpExpires = otpExpires;
+      await user.save();
+    } else {
+      throw new Error("Email not sent");
+    }
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw new Error("Error sending email");
+  }
+
+  return { message: "OTP sent to your email" };
+};
+
+userSchema.statics.resetPassword = async function (email, otp, newPassword) {
+  const user = await this.findOne({ email, otp });
+
+  if (!user) {
+    throw new Error("Invalid OTP");
+  }
+
+  if (user.otpExpires < Date.now()) {
+    throw new Error("OTP expired");
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(newPassword, salt);
+
+  user.password = hash;
+  user.otp = undefined;
+  user.otpExpires = undefined;
+  await user.save();
+
+  return { message: "Password reset successfully" };
+};
 
 const User = mongoose.model("User", userSchema);
 
