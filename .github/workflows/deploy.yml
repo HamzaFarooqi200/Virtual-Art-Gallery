@@ -1,32 +1,59 @@
-name: Deploy to EC2
+name: Deploy to AWS EC2
 
 on:
   push:
     branches:
-      - main  # Runs when code is pushed to the main branch
+      - main  # Adjust branch if needed
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout repository
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
+      # Step 2: Debug the runner environment
+      - name: Debug GitHub Actions Runner
+        run: |
+          echo "🔹 Current User: $(whoami)"
+          echo "🔹 Home Directory: $HOME"
+          echo "🔹 List home directory contents:"
+          ls -lah $HOME
+          echo "🔹 Environment Variables:"
+          env
+          
+      # Step 3: Setup SSH Key
       - name: Set up SSH Key
         run: |
           mkdir -p ~/.ssh
-            echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-            cat ~/.ssh/id_rsa  # Debugging step (Remove later)
-            chmod 600 ~/.ssh/id_rsa
-            ssh-keyscan -H 13.60.93.179 >> ~/.ssh/known_hosts
+          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 13.60.93.179 >> ~/.ssh/known_hosts
+          echo "🔹 SSH Key Setup Completed"
 
-
-      - name: Deploy Code to EC2
+      # Step 4: Debug SSH Configuration
+      - name: Debug SSH Setup
         run: |
-          ssh -i ~/.ssh/id_rsa ubuntu@13.60.93.179 << 'EOF'
-            cd /home/ubuntu/app  # Change this to your app directory
-            git pull origin main
-            npm install  # Run this if it's a Node.js app
-            pm2 restart all  # Restart the app
+          echo "🔹 Checking .ssh directory"
+          ls -lah ~/.ssh/
+          echo "🔹 Checking SSH key permissions"
+          ls -lah ~/.ssh/id_rsa
+          echo "🔹 Checking known_hosts file"
+          cat ~/.ssh/known_hosts || echo "No known_hosts file found"
+
+      # Step 5: Test SSH Connection
+      - name: Test SSH Connection
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@13.60.93.179 "echo '✅ SSH Connection Successful'"
+      
+      # Step 6: Deploy the application (Replace with actual deployment steps)
+      - name: Deploy Application to EC2
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@13.60.93.179 << 'EOF'
+          cd /home/ubuntu/your-app-directory
+          git pull origin main
+          docker-compose up --build -d
           EOF
+          echo "✅ Deployment Successful"
