@@ -1,59 +1,39 @@
-name: Deploy to AWS EC2
+name: Deploy to EC2
 
 on:
   push:
     branches:
-      - main  # Adjust branch if needed
+      - main  # Change this to your deployment branch if different
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout repository
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Step 2: Debug the runner environment
-      - name: Debug GitHub Actions Runner
-        run: |
-          echo "🔹 Current User: $(whoami)"
-          echo "🔹 Home Directory: $HOME"
-          echo "🔹 List home directory contents:"
-          ls -lah $HOME
-          echo "🔹 Environment Variables:"
-          env
-          
-      # Step 3: Setup SSH Key
-      - name: Set up SSH Key
+      - name: Setup SSH Key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 13.60.93.179 >> ~/.ssh/known_hosts
-          echo "🔹 SSH Key Setup Completed"
+          echo "✅ SSH Key Setup Completed"
 
-      # Step 4: Debug SSH Configuration
       - name: Debug SSH Setup
         run: |
-          echo "🔹 Checking .ssh directory"
-          ls -lah ~/.ssh/
-          echo "🔹 Checking SSH key permissions"
-          ls -lah ~/.ssh/id_rsa
-          echo "🔹 Checking known_hosts file"
-          cat ~/.ssh/known_hosts || echo "No known_hosts file found"
-
-      # Step 5: Test SSH Connection
-      - name: Test SSH Connection
-        run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@13.60.93.179 "echo '✅ SSH Connection Successful'"
+          ls -la ~/.ssh
+          echo "🟢 SSH Directory Exists"
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ec2-user@13.60.93.179 "echo '🟢 Connected to EC2 successfully'"
       
-      # Step 6: Deploy the application (Replace with actual deployment steps)
-      - name: Deploy Application to EC2
+      - name: Deploy to EC2
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@13.60.93.179 << 'EOF'
-          cd /home/ubuntu/your-app-directory
-          git pull origin main
-          docker-compose up --build -d
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ec2-user@13.60.93.179 << 'EOF'
+            echo "🚀 Starting Deployment"
+            cd /home/ec2-user/my-app  # Change this to your app directory
+            git pull origin main
+            npm install  # Modify based on your stack
+            pm2 restart my-app  # Modify based on your process manager
+            echo "✅ Deployment Completed"
           EOF
-          echo "✅ Deployment Successful"
