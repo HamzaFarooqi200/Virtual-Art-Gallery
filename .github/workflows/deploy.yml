@@ -1,0 +1,30 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # Runs when code is pushed to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 13.60.93.179 >> ~/.ssh/known_hosts
+
+      - name: Deploy Code to EC2
+        run: |
+          ssh -i ~/.ssh/id_rsa ubuntu@13.60.93.179 << 'EOF'
+            cd /home/ubuntu/app  # Change this to your app directory
+            git pull origin main
+            npm install  # Run this if it's a Node.js app
+            pm2 restart all  # Restart the app
+          EOF
