@@ -16,9 +16,11 @@ jobs:
       - name: Set up SSH Key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 13.60.93.179 >> ~/.ssh/known_hosts
+            echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+            cat ~/.ssh/id_rsa  # Debugging step (Remove later)
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan -H 13.60.93.179 >> ~/.ssh/known_hosts
+
 
       - name: Deploy Code to EC2
         run: |
