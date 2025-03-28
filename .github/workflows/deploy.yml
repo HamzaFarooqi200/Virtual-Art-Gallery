@@ -1,40 +1,29 @@
-name: Deploy to AWS EC2
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main
-
+      - main 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v3
 
-      - name: Debug Secrets
-        run: |
-          if [[ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]]; then
-            echo "❌ SSH_PRIVATE_KEY is empty!"
-            exit 1
-          else
-            echo "✅ SSH_PRIVATE_KEY is set!"
-          fi
+    - name: Set up SSH Key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.EC2_PUBLIC_IP }} >> ~/.ssh/known_hosts
 
-      - name: Set up SSH Key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 --decode > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 13.60.93.179 >> ~/.ssh/known_hosts
-          echo "✅ SSH Key Setup Completed"
-
-      - name: Deploy Application to EC2
-        run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@13.60.93.179 << 'EOF'
-          cd /var/www/your-app
+    - name: Deploy to EC2
+      run: |
+        ssh ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+          cd /home/ubuntu/app
           git pull origin main
-          docker-compose up --build -d
-          echo "✅ Deployment Completed!"
-          EOF
+          npm install
+          pm2 restart all  # If using PM2 for process management
+        EOF
