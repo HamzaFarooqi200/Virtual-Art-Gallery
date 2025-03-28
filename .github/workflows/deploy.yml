@@ -10,31 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup SSH Key
+      - name: Debug Secrets
+        run: |
+          if [[ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]]; then
+            echo "❌ SSH_PRIVATE_KEY is empty!"
+            exit 1
+          else
+            echo "✅ SSH_PRIVATE_KEY is set!"
+          fi
+
+      - name: Set up SSH Key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | sed 's/\r$//' > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 13.60.93.179 >> ~/.ssh/known_hosts
           echo "✅ SSH Key Setup Completed"
 
-      - name: Debug SSH Configuration
-        run: |
-          echo "🔍 Checking SSH Configuration..."
-          ls -lah ~/.ssh
-          cat ~/.ssh/id_rsa | head -n 5
-          ssh -T -o StrictHostKeyChecking=no ubuntu@13.60.93.179 || echo "⚠️ SSH Connection Failed"
-
-      - name: Deploy to EC2
+      - name: Deploy Application to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@13.60.93.179 << 'EOF'
-            cd /var/www/your-app
-            git pull origin main
-            docker-compose down
-            docker-compose up -d --build
+          cd /var/www/your-app
+          git pull origin main
+          docker-compose up --build -d
+          echo "✅ Deployment Completed!"
           EOF
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
