@@ -18,7 +18,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ec2-your-ip.amazonaws.com >> ~/.ssh/known_hosts
+        ssh-keyscan -H 51.21.249.204 >> ~/.ssh/known_hosts
         cat ~/.ssh/id_rsa  # Debugging step, remove after testing
     - name: Deploy to EC2
       run: |
